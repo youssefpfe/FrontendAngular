@@ -1,0 +1,55 @@
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Examen</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Nom</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="nom" formControlName='nom' >
+        <div *ngIf="this.add.controls.nom?.invalid && (this.add.controls.nom?.dirty || this.add.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.nom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['minlength']">
+            Au moins 2 caractères .
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['maxlength']">
+            Au plus 20 caractères .
+          </div>
+
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Prix</label>
+        <input type="number" class="form-control " [ngClass]="(this.add.controls.prix.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="DT" required="required" name="prix" formControlName='prix' >
+        <div *ngIf="this.add.controls.prix?.invalid && (this.add.controls.prix?.dirty || this.add.controls.prix?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.prix?.errors?.['required']" >
+            obligatoire
+          </div>
+          <div *ngIf="this.add.controls.prix?.errors?.['minlength']">
+            au moins 1 numéro .
+          </div>
+          <div *ngIf="this.add.controls.prix?.errors?.['maxlength']">
+            au plus 15 numéros .
+          </div>
+          <div *ngIf="this.add.controls.prix?.errors?.['pattern']">
+            ce prix n'est pas valid .
+          </div>
+        </div>
+      </div>
+
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 300px" [disabled]='add.invalid' (click)="addExamen(examen)"/>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

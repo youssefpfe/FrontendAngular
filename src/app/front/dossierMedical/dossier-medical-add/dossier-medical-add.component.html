@@ -1,0 +1,36 @@
+<!--<p-toast styleClass="custom-toast"></p-toast>-->
+
+<div class="mat-typography"><p-toast class="mat-typography" styleClass="custom-toast" >
+
+</p-toast></div>
+<div class="card card-warning">
+
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Dossier Medical</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Remarque </label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.conseff.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="conseff" formControlName='conseff' >
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Resultats Prestations</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.resultat.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="resultat" formControlName='resultat' >
+      </div>
+
+
+
+
+
+
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 300px" [disabled]='false' (click)="addDossier(dossierMedical)"/>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

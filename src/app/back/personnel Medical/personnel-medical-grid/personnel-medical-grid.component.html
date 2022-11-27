@@ -1,0 +1,79 @@
+<button style="margin-left:37%;margin-top:2%;" class="button-84" [routerLink]="['add']" >Nouveau Personnel Medical</button>
+<div class="card-body">
+
+  <table id="personnel" class="table table-bordered table-hover table-striped table-responsive"  >
+
+    <thead>
+
+    <tr>
+      <th class="testTd" style="display:inline ">Photo</th>
+      <th class="testTd" style="display:inline ">
+        Nom
+      </th>
+      <th class="testTd" style="display:inline ">
+        Prenom
+      </th>
+      <!--<th>
+        Email
+      </th>-->
+      <th class="testTd" style="display:inline ">
+        Télephone
+      </th>
+      <th class="testTd" style="display:inline ">
+        Accueil
+      </th>
+      <th class="testTd" style="display:inline ">
+        Salles D'attente
+      </th>
+      <th class="testTd" style="display:inline ">
+      Services Consultation
+    </th>
+
+      <th class="testTd" style="width:25%">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd" *ngFor="let p of personnels">
+      <td  tabindex="0" width="7%"><img style="width:80%;border-radius:10px;box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);cursor: pointer;object-fit:cover" src={{p.photo}}/></td>
+      <td class="dtr-control sorting_1 testTd"><span style="display:block;margin-top: 20%;">{{p.nom}}</span></td>
+      <td class="testTd" ><span style="display:block;margin-top: 16%;">{{p.prenom}}</span></td>
+      <!--<td>{{p.email}}</td>-->
+      <td class="testTd"><span style="display:block;margin-top: 12%;">{{p.telephone}}</span></td>
+      <td class="testTd"><span style="display:block;margin-top: 16%;">{{p?.accueil?.nom}}</span></td>
+      <td class="testTd"><span style="display:block;margin-top: 6%;">{{p?.salleAttente?.nom}}</span></td>
+      <td class="testTd"><span style="display:block;margin-top: 4%;">{{p?.serviceConsultation?.nomService}}</span></td>
+
+      <td class="testTd"><button [routerLink]="['edit',p.id]"  class="button-29"  >Modifier</button> <button class="button-29" style="margin-top:2%;margin-left:3%;padding-right: 15px;background-image:radial-gradient(100% 100% at 100% 0, red 0, red 100%);" (click)="delete(p.id)">Effacer</button></td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    <tr>
+      <th class="testTd" style="display:inline ">Photo</th>
+      <th class="testTd" style="display:inline ">
+        Nom
+      </th>
+      <th class="testTd" style="display:inline ">
+        Prenom
+      </th>
+      <!--<th>
+        Email
+      </th>-->
+      <th class="testTd" style="display:inline ">
+        Télephone
+      </th>
+      <th class="testTd" style="display:inline ">
+        Accueil
+      </th>
+      <th class="testTd" style="display:inline ">
+        Salles D'attente
+      </th>
+      <th class="testTd" style="display:inline ">
+        Services Consultation
+      </th>
+
+      <th class="testTd" style="width:25%">Actions</th>
+    </tr>
+    </tfoot>
+  </table>
+</div>

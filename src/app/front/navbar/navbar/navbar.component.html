@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand" >Hôpital Militaire</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="dropdown" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExample07" style="margin-left:5%">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item " [hidden]="!auth.isServiceIn && !auth.isPaymentIn && !auth.isPriseIn">
+          <a class="nav-link" [routerLink]="['/front/patient']" style="color:#d7d860">Patients <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item " [hidden]="!auth.isPaymentIn">
+          <a class="nav-link" [routerLink]="['/front/assurance']" style="color:#d7d860">Assurance </a>
+        </li>
+        <li class="nav-item" [hidden]="!auth.isConsultantIn" >
+          <a class="nav-link"  [routerLink]="['/front/rdvs']" style="color:#d7d860">Mes Rendez-Vous</a>
+        </li>
+        <li class="nav-item"  [hidden]="!auth.isAttentIn">
+          <a class="nav-link"  [routerLink]="['/front/attente']" style="color:#d7d860">Salle D'Attente</a>
+        </li>
+        <li class="nav-item" hidden="true">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+        <li class="dropdown" hidden="true">
+
+          <button class="dropbtn">Dropdown</button>
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+
+        </li>
+      </ul>
+      <div class="nav-item  my-2 my-md-0"  >
+        <a class="nav-link dropbtn" (click)="logout()">Déconnexion</a>
+      </div>
+      <a class="nav-link" data-widget="fullscreen"  role="button">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </a>
+    </div>
+  </div>
+</nav>

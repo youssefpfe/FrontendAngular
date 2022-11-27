@@ -1,0 +1,267 @@
+<div class="row text-center">
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Précédent
+      </div>
+      <div
+        class="btn btn-outline-secondary"
+        mwlCalendarToday
+        [(viewDate)]="viewDate"
+      >
+        Aujourd'hui
+      </div>
+      <div
+        class="btn btn-primary"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()"
+      >
+        Prochain
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}</h3>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group">
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month"
+      >
+        Mois
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Week)"
+        [class.active]="view === CalendarView.Week"
+      >
+        Semaine
+      </div>
+      <div
+        class="btn btn-primary"
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day"
+      >
+        Jour
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [locale]="locale"
+
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+    (beforeViewRender)="beforeMonthViewRender($event)"
+
+  >
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [locale]="locale"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+  >
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [locale]="locale"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent('Clicked', $event.event)"
+    (eventTimesChanged)="eventTimesChanged($event)"
+
+  >
+  </mwl-calendar-day-view>
+</div>
+
+<!-- Everything you see below is just for the demo, you don't need to include it in your app -->
+
+<br /><br /><br />
+
+<h3>
+  Rendez-Vous
+  <button class="btn btn-primary float-end" (click)="addEvent()">
+    Nouveau
+  </button>
+  <div class="clearfix"></div>
+</h3>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Nom Patient </th>
+
+      <th>Nom consultant</th>
+      <th>Examen</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let event of events">
+      <td>
+        <input
+          type="text"
+          class="form-control"
+          [disabled]="true"
+          [(ngModel)]="event.title"
+          (keyup)="refresh.next()"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          [disabled]="true"
+          [(ngModel)]="event.cssClass"
+          (change)="refresh.next()"
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          [disabled]="true"
+          [(ngModel)]="event.meta"
+          (change)="refresh.next()"
+        />
+
+      </td>
+      <td>
+        <input
+          class="form-control flatpickr"
+          type="text"
+          [disabled]="true"
+          mwlFlatpickr
+          [(ngModel)]="event.start"
+          (ngModelChange)="refresh.next()"
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          [allowInput]="true"
+          [locale]="'French'"
+
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set"
+        />
+      </td>
+     <!-- <td>
+        <input
+          class="form-control flatpickr-input"
+          type="text"
+          [disabled]="true"
+          mwlFlatpickr
+          [(ngModel)]="event.end"
+          (ngModelChange)="refresh.next()"
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set"
+        />
+      </td>-->
+
+
+
+
+      <td>
+        <button class="btn btn-danger" (click)="deleteEvent(event,event.id)">
+          Effacer
+        </button>
+      </td>
+    </tr>
+
+    <tr *ngIf="add">
+      <td>
+        <input
+          type="text"
+          [disabled]="true"
+          [(ngModel)]="patient.nom +' '+ patient.prenom "
+          (keyup)="refresh.next()"
+        />
+      </td>
+      <!--[(ngModel)]="event.title"-->
+      <td>
+        <input
+          type="text"
+          [disabled]="true"
+          [(ngModel)]="this.consultant.nom +' '+ this.consultant.prenom "
+          (change)="refresh.next()"
+        />
+      </td>
+      <!--[(ngModel)]="event.cssClass"-->
+      <td>
+      <select class="form-control" [(ngModel)]="prise.examenId">
+        <option *ngFor="let ex of examens" [ngValue]="ex.id"  >{{ex.nomExamen}}</option>
+      </select>
+      <div *ngIf="this.addprise.controls.examen?.invalid && (this.addprise.controls.examen?.dirty || this.addprise.controls.examen?.touched)" style="color:red">
+
+        <div *ngIf="this.addprise.controls.examen?.errors?.['required']" >
+          Veuillez Choisir l'examen  !
+        </div>
+
+
+      </div>
+      </td>
+
+      <td>
+        <input
+          class="form-control flatpickr"
+          type="text"
+
+          mwlFlatpickr
+          [(ngModel)]="prise.dateRDV"
+          (ngModelChange)="refresh.next()"
+          [altInput]="true"
+          [convertModelValue]="true"
+          [enableTime]="true"
+          [allowInput]="true"
+          [locale]="'French'"
+          dateFormat="Y-m-dTH:i"
+          altFormat="F j, Y H:i"
+          placeholder="Not set"
+        />
+      </td>
+      <!--[(ngModel)]="event.start"-->
+
+
+
+
+
+      <td>
+        <button class="btn btn-primary" [disabled]="prise.dateRDV==null " (click)="Add(prise)" >
+          Ajouter
+        </button>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>

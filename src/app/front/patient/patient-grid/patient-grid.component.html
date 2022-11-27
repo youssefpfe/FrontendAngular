@@ -1,0 +1,89 @@
+<p-toast></p-toast>
+<div class="card-body">
+  <button style="margin-left:39%;" class="button-84" [routerLink]="['add']" >Nouveau Patient</button>
+
+  <table id="patient" class="table table-bordered table-hover table-striped" >
+
+    <thead>
+
+    <tr>
+      <th class="testTd">Photo</th>
+      <th class="testTd" >
+        Nom
+      </th>
+      <th class="testTd">
+        Prenom
+      </th>
+      <th class="testTd">
+        CIN
+      </th>
+      <th class="testTd">
+        Assuré
+      </th>
+      <!--<th>
+        Email
+      </th>-->
+
+
+      <th class="testTd">
+        Salle D'attente
+      </th>
+
+
+      <th class="testTd">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd" *ngFor="let p of patients">
+      <td  tabindex="0" width="7%" class="testTd"><img  style="width:80%;border-radius:10px;box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);cursor: pointer;object-fit:cover"  src={{p.photo}}/></td>
+      <td class="dtr-control sorting_1 testTd"><span style="display:block">{{p.nom}}</span></td>
+      <td class="testTd"><span style="display:block">{{p.prenom}}</span></td>
+      <td class="testTd"><span style="display:block">{{p.numIdendite}}</span></td>
+      <td *ngIf="p.estAssure" class="testTd"><span style="display:block">Oui</span></td> <td class="testTd" *ngIf="!p.estAssure"><span style="display:block">Non</span></td>
+      <!--<td>{{p.email}}</td>-->
+
+      <td class="testTd"><span style="display:block">{{p?.salleAttente?.nom}}</span></td>
+
+      <td class="testTd"><button [routerLink]="['edit',p.id]"  class="button-29"  style="padding-right: 5px;margin-top:4%">Modifier</button>
+        <button class="button-29" style="margin-left:2%;padding-right: 6px;background-image:radial-gradient(100% 100% at 100% 0, red 0, red 100%);" (click)="delete(p.id)">Effacer</button>
+      <button [routerLink]="['rendezvous',p.id]" [hidden]="!this.serv" class="button-29" style="margin-left:2%;padding-right: 6px;" >Prise Rdv</button>
+      <button [routerLink]="['payment',p.id]" [hidden]="!this.pay" class="button-29" style="margin-left:2%;padding-right: 6px;" >Paiement</button>
+
+      </td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    <tr>
+      <th class="testTd">Photo</th>
+      <th class="testTd" >
+        Nom
+      </th>
+      <th class="testTd">
+        Prenom
+      </th>
+      <th class="testTd">
+        CIN
+      </th>
+      <th class="testTd">
+        Assuré
+      </th>
+      <!--<th>
+        Email
+      </th>-->
+
+
+      <th class="testTd">
+        Salle D'attente
+      </th>
+
+
+      <th class="testTd">Actions</th>
+    </tr>
+    </tfoot>
+  </table>
+  <br><hr>
+
+</div>
+
+

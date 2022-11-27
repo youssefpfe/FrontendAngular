@@ -1,0 +1,68 @@
+
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Modifier Service Consultation</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="edit">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Nom Du Service</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="consultant.username" formControlName='nom' [(ngModel)]="serviceConsultation.nomService">
+        <div *ngIf="this.edit.controls.nom?.invalid && (this.edit.controls.nom?.dirty || this.edit.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.nom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['minlength']">
+            Au moins 4 caractères .
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Type Du Service</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.type.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="serviceConsultation.typeService" formControlName='type' [(ngModel)]="serviceConsultation.typeService">
+        <div *ngIf="this.edit.controls.type?.invalid && (this.edit.controls.type?.dirty || this.edit.controls.type?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.type?.errors?.['required']" >
+            Obligatoire*
+          </div>
+          <div *ngIf="this.edit.controls.type?.errors?.['minlength']">
+            Au moins 4 caractères .
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Salle D'Attente</label>
+            <select class="form-control" formControlName='salle'>
+              <option  *ngFor="let salle of salleAttentes" [ngValue]="salle.id" >{{salle.nom}}</option>
+
+            </select>
+            <div *ngIf="this.edit.controls.salle?.invalid && (this.edit.controls.salle?.dirty || this.edit.controls.salle?.touched)" style="color:red">
+
+              <div *ngIf="this.edit.controls.salle?.errors?.['required']" >
+                obligatoire*
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <input type="submit" class="button-29" value=" Modifier " style="margin-left: 353px" [disabled]='edit.invalid' (click)="editConsultant(serviceConsultation)"/>
+      <button class="button-29" style="margin-left: 10px" [routerLink]="['../../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,97 @@
+<div id="phot">
+  <button class="btn btn-primary" style="margin-left:20%;margin-top:1%" [routerLink]="['../']" *ngIf="ordshowhide" >Retour</button>
+<div class="container py-4 my-4 mx-auto d-flex flex-column" id="bod" >
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="header">
+    <div class="row r1">
+      <div class="mb-5 abc">
+
+        <h1 style="font-family:cursive">Dossier Medical : {{this.dossierMedical1.nomPatient}} {{this.dossierMedical1.prenomPatient}}</h1>
+      </div>
+
+    </div>
+  </div>
+  <div class="container-body mt-4">
+    <div class="">
+      <div class=" p-0 klo">
+
+
+      <div class="row d-flex justify-content-center" >
+        <div class="d-flex flex-column align-items-center col-5" style="min-width:50%">
+          <div class="form-outline col-7 mb-1" style="min-width:300px" >
+            <label class="form-label" style="min-width:100%">Remarques :</label>
+            <input [disabled]="this.modif || this.rdv.payed==null" id="form2Example11"  class="form-control" required="required" name="dossierMedical1.consultationEffectuee"  [(ngModel)]="dossierMedical1.consultationEffectuee">
+          </div>
+
+          <div class="form-outline col-7 mb-4" style="min-width:300px">
+            <label class="form-label">Resultats Prestation :</label>
+            <input [disabled]="this.modif || this.rdv.payed==null" id="form2Example12" class="form-control" required="required" name="dossierMedical1.resultatPrestation"  [(ngModel)]="dossierMedical1.resultatPrestation">
+          </div>
+        </div>
+
+        <div class="col-5 d-flex justify-content-center align-items-center" style="margin-top:1%;min-width:300px">
+          <button [disabled]="this.modif || this.rdv.payed==null" class="btn btn-info btn-block col-4" (click)="editDossier(dossierMedical)" >Modifier</button>
+        </div>
+
+      </div>
+        <div class="mt-4 mb-4 d-flex justify-content-center">
+          <h2 *ngIf="ordshowhide">Consultation(s) :</h2>
+          <h2 *ngIf="!ordshowhide">Ordonnance :</h2>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+    <div class="d-flex justify-content-around container-fluid mt-auto" style="display: flex;flex-wrap: wrap;min-width:1000px" *ngIf="ordshowhide">
+    <div class="wrap" id="bodt" *ngFor="let c of consultations;let i=index " >
+      <!--<h1 id="h1">Hover card</h1>-->
+      <div class="task testbox">
+        <div class="abstract">
+          <h3>Consultation {{i+1}}</h3>
+          <div class="d-flex justify-content-between p-price"><span>Type</span><span>{{c.typeConsultation}}</span></div>
+          <div class="d-flex justify-content-between p-price"><span>Date</span><span>{{c.dateConsultation | date:"yyyy-MM-dd HH:mm:ss"}}</span></div>
+          <div class="d-flex justify-content-between p-price"><span>Diagnostic</span><span>{{c.diagnostic}}</span></div>
+
+        </div>
+        <div class="details" *ngFor="let o of ordonnances"  >
+
+          <div class="details__inner" *ngIf="c.id==o.consultation.id" (click)="ordonnance=o; ordshowhide=false">
+            <h3>Ordonnance</h3>
+            <div class="d-flex justify-content-between p-price"><span>Nature :</span><span>{{o.natureOrdonnance}}</span></div>
+            <div class="d-flex justify-content-between p-price"><span>Examen(s) :</span></div>
+            <div class="d-flex justify-content-end p-price" *ngFor="let e of o.examens"><span>{{e.nomExamen}}</span><!--<span>{{e.prixExamen}}DT</span>--></div>
+            <div class="d-flex justify-content-between p-price"><span>Medicament(s) : </span></div>
+            <div class="d-flex justify-content-between p-price" *ngFor="let m of o.medicaments"><span>{{m.nomMedicament}}</span><span>{{m.dureeDePrise}}J</span></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <div class="wrap" id="bodt">
+    <!--<h1 id="h1">Hover card</h1>-->
+
+       <div [hidden]="this.rdv.payed ==null">
+    <div class="task" style=" width:150px" [hidden]="this.modif" [routerLink]="['ajoutconsultation']">
+      <div class="abstract" >
+        <img src="https://media.istockphoto.com/vectors/plus-symbol-sign-in-hand-drawn-style-illustration-isolated-on-white-vector-id1225992522?k=20&m=1225992522&s=612x612&w=0&h=UKxCnTKmAq18Ji757kUEP-PaqF9L9NtZoJ1X_xTk_S0=" style=" width:120px;margin-left: -17%" />
+      </div>
+
+    </div>
+       </div>
+  </div>
+    </div>
+
+  </div>
+
+</div>
+  <app-ordonnance-view [ordonnance]="ordonnance" *ngIf="!ordshowhide"></app-ordonnance-view>
+  <button class="btn btn-primary" style="margin-left:70%;margin-bottom:5%" (click)="ordshowhide=!ordshowhide" *ngIf="!ordshowhide">Retour</button>
+
+</div>
+

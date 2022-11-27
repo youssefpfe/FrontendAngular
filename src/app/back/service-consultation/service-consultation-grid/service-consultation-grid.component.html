@@ -1,0 +1,76 @@
+<button style="margin-left:37%;margin-top:2%;" class="button-84" [routerLink]="['add']" >Nouveau Service Consultation</button>
+<div class="card-body">
+
+  <table id="services" class="table table-bordered table-hover table-striped"  >
+
+    <thead>
+
+    <tr>
+
+      <th class="testTd" >
+        Nom
+      </th>
+      <th class="testTd" >
+        Type
+      </th>
+      <th class="testTd" >
+        Salles D'attente
+      </th>
+      <th class="testTd"   >
+        Consultants
+      </th>
+      <th class="testTd"  >
+        Personnel Medical
+      </th>
+      <th class="testTd" style="width:22%">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd" *ngFor="let s of serviceConsultations">
+
+      <td  tabindex="0" class="dtr-control sorting_1 testTd">{{s.nomService}}</td>
+      <td class="testTd">{{s.typeService}}</td>
+      <td class="testTd">{{s.salleAttente.nom}}</td>
+      <td class="testTd">
+        <select class="form-control"  >
+          <option  *ngFor="let c of s.consultants"   >{{c.nom}} {{c.prenom}}</option>
+
+        </select>
+      </td>
+     <td>
+        <select class="form-control"  >
+          <option  *ngFor="let p of s.personnelMedicals"   >{{p.nom}} {{p.prenom}}</option>
+
+        </select>
+      </td>
+      <td class="d-flex justify-content-center" style="display:flex;"><button  [routerLink]="['edit',s.id]"  class="button-29"  >Modifier</button> <button class="button-29" style="margin-left:2%;background-image:radial-gradient(100% 100% at 100% 0, red 0, red 100%);" (click)="delete(s.id)">Effacer</button></td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    <tr>
+
+      <th class="testTd" >
+        Nom
+      </th>
+      <th class="testTd" style="display:block ">
+        Type
+      </th>
+      <th class="testTd" >
+        Salles D'attente
+      </th>
+      <th class="testTd"   >
+        Consultants
+      </th>
+      <th class="testTd"  >
+        Personnel Medical
+      </th>
+      <th class="testTd" style="width:22%">Actions</th>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+
+

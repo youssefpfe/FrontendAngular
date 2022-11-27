@@ -1,0 +1,168 @@
+
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Modifier Personnel Medical</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="edit">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Username</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.username.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="personnel.username" formControlName='username' [(ngModel)]="personnel.username">
+        <div *ngIf="this.edit.controls.username?.invalid && (this.edit.controls.username?.dirty || this.edit.controls.username?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.username?.errors?.['required']" >
+            Nom D'utilisateur est obligatoire
+          </div>
+          <div *ngIf="this.edit.controls.username?.errors?.['minlength']">
+            Nom D'utilisateur au moins 4 characters .
+          </div>
+          <div *ngIf="this.edit.controls.username?.errors?.['maxlength']">
+            Nom D'utilisateur au plus 50 characters .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Nom</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="personnel.nom" formControlName='nom' [(ngModel)]="personnel.nom">
+        <div *ngIf="this.edit.controls.nom?.invalid && (this.edit.controls.nom?.dirty || this.edit.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.nom?.errors?.['required']" >
+            Nom obligatoire
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['minlength']">
+            au moins 3 characters .
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['maxlength']">
+            au plus 30 characters .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Prenom</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.prenom.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="personnel.prenom" formControlName='prenom' [(ngModel)]="personnel.prenom">
+        <div *ngIf="this.edit.controls.prenom?.invalid && (this.edit.controls.prenom?.dirty || this.edit.controls.prenom?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.prenom?.errors?.['required']" >
+            Prenom  est obligatoir
+          </div>
+          <div *ngIf="this.edit.controls.prenom?.errors?.['minlength']">
+            Prenom  au moins 3 characters .
+          </div>
+          <div *ngIf="this.edit.controls.prenom?.errors?.['maxlength']">
+            Prenom  au plus 30 characters .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Email</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.email.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..." required="required" name="personnel.email" formControlName='email' [(ngModel)]="personnel.email">
+        <div *ngIf="this.edit.controls.email?.invalid && (this.edit.controls.email?.dirty || this.edit.controls.email?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.email?.errors?.['required']" >
+            Email  est obligatoir
+          </div>
+          <div *ngIf="this.edit.controls.email?.errors?.['email']">
+            Cette Adresse N'est Pas Valide
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Télephone</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.telephone.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..." required="required" name="personnel.telephone" formControlName='telephone' [(ngModel)]="personnel.telephone">
+        <div *ngIf="this.edit.controls.telephone?.invalid && (this.edit.controls.telephone?.dirty || this.edit.controls.telephone?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.telephone?.errors?.['required']" >
+            Obligatoire *
+          </div>
+          <div *ngIf="this.edit.controls.telephone?.errors?.['minlength']">
+            Entrez 8 Numéros.
+          </div>
+          <div *ngIf="this.edit.controls.telephone?.errors?.['maxlength']">
+            Entrez 8 Numéros .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="ph"> Photo</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.photo.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." name="personnel.photo" formControlName='photo' [(ngModel)]="personnel.photo">
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Titre</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.titre.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="personnel.titre" formControlName='titre' [(ngModel)]="personnel.titre">
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Fonction</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.fonction.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="personnel.fonction" formControlName='fonction' [(ngModel)]="personnel.fonction">
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Service</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.service.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="personnel.service" formControlName='service' [(ngModel)]="personnel.service">
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Accueil</label>
+            <select class="form-control" [(ngModel)]="this.idac"  formControlName='acc'>
+              <option *ngFor="let a of acceuils" [ngValue]="a.id"  >{{a.nom}}</option>
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Salle D'attente</label>
+            <select class="form-control" [(ngModel)]="this.idsall"  formControlName='salle'>
+              <option *ngFor="let sa of salleAttentes" [ngValue]="sa.id"  >{{sa.nom}}</option>
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Service Consultation</label>
+            <select class="form-control" [(ngModel)]="this.idserv" formControlName='serv'>
+              <option *ngFor="let serv of serviceConsultations" [ngValue]="serv.id" > {{serv.nomService}} </option>
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" [(ngModel)]="this.personnel.roles[0]" formControlName='rol'>
+
+              <option *ngFor="let role of roles"  [ngValue]="role"   >{{role}}</option>
+
+            </select>
+          </div>
+        </div>
+
+      </div>
+
+      <input type="submit" class="button-29" value=" Modifier " style="margin-left: 353px" [disabled]='edit.invalid' (click)="editPersonnel(personnel)"/>
+      <button class="button-29" style="margin-left: 10px" [routerLink]="['../../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

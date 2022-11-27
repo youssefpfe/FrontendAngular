@@ -1,0 +1,73 @@
+
+<div class="wrapper" >
+  <div class="link_wrapper">
+    <a id="retourB" [routerLink]="['../../']">Retour</a>
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
+        <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+<div class="content" id="paybody">
+
+  <div class="container">
+
+
+
+    <div class="table-responsive custom-table-responsive">
+
+      <table class="table custom-table">
+        <thead>
+        <tr>
+
+          <th scope="col">
+            <label class="control control--checkbox">
+              <input type="checkbox" [checked]="this.check" class="js-check-all" (change)="checkall()"/>
+              <div class="control__indicator"></div>
+            </label>
+          </th>
+
+          <th scope="col" class="testTd">Date Prestation</th>
+          <th scope="col" class="testTd">Nom Patient</th>
+          <th scope="col" class="testTd">Prestation</th>
+          <th scope="col" class="testTd">Service Consultation</th>
+          <th scope="col" class="testTd">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+<ng-container *ngFor="let r of priseRdvs">
+        <tr class="spacer"><td colspan="100"></td></tr>
+        <tr  [ngClass]="(r.payed) ? 'green' : (r.isChecked) ? 'active' : 'null'">
+          <th scope="row">
+            <label class="control control--checkbox" *ngIf="!r.payed">
+              <input type="checkbox" [checked]="r.isChecked" (change)="r.isChecked=!r.isChecked;this.check=false;" />
+              <div class="control__indicator"></div>
+            </label>
+          </th>
+
+          <td class="testTd">{{r.dateRDV |date :"yyyy-MM-dd HH:mm:ss"}}</td>
+          <td class="testTd"><a style="color:blueviolet" >{{r.patient.nom}} {{r.patient.prenom}}</a></td>
+          <td class="testTd" >
+            {{r.examen.nomExamen}}
+            <small class="d-block justify-content-center">{{r.examen.prixExamen * (1-r.patient.tauxAssurance) |number}} DT</small>
+          </td>
+          <td class="testTd">{{r.serviceConsultation.nomService}}</td>
+          <td class="testTd"><div id="bodbod" [routerLink]="[r.id]" *ngIf="!r.payed" ><a id="apay"><span >Payer</span></a></div><!--<button [routerLink]="[r.id]" *ngIf="!r.payed" >Payer</button>--> <button class="print-button" [routerLink]="[r.id]" *ngIf="r.payed" ><span class="print-icon"></span></button></td>
+        </tr>
+</ng-container>
+
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+
+</div>
+
+
+
+

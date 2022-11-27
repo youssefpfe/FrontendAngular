@@ -1,0 +1,38 @@
+
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Modifier Acceuil</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="edit">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Nom Du Salle</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="acceuil.nom" formControlName='nom' [(ngModel)]="acceuil.nom">
+        <div *ngIf="this.edit.controls.nom?.invalid && (this.edit.controls.nom?.dirty || this.edit.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.nom?.errors?.['required']" >
+            Obligatoire*
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['minlength']">
+            Au moins 2 caractères .
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['maxlength']">
+            Au plus 50 caractères .
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <input type="submit" class="button-29" value=" Modifier " style="margin-left: 353px" [disabled]='edit.invalid' (click)="editAcceuil(acceuil)"/>
+      <button class="button-29" style="margin-left: 10px" [routerLink]="['../../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

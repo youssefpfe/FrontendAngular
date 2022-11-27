@@ -1,0 +1,97 @@
+
+    <form role="form">
+
+        <div class="d-flex justify-content-around mb-5">
+          <div class="form-outline col-5 mt-5">
+            <label class="form-label" for="startDate">Date debut :</label>
+            <input class="form-control form-control-lg" type="date" name="startDate" id="startDate" [(ngModel)]="d1">
+          </div>
+
+          <div class="form-outline col-5 mt-5">
+            <label class="form-label" for="endDate">Date fin :</label>
+            <input class="form-control form-control-lg" type="date" name="endDate" id="endDate" [(ngModel)]="d2">
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary col-2" style="padding:18px" (click)="getStats(d1,d2)">
+            Rechercher
+          </button>
+        </div>
+    </form>
+
+
+<!-- top page cards -->
+
+<section class="content" style="margin-top: 60px">
+  <div class="container-fluid">
+
+    <div class="row d-flex justify-content-around">
+      <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-info">
+          <div class="inner">
+            <h3 class="d-flex justify-content-center">{{this.patientassure}}</h3>   <!-- count in backend and get the number here -->
+            <p class="d-flex justify-content-center">Patients assurés</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-bag"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-success">
+          <div class="inner">
+            <h3 class="d-flex justify-content-center" *ngIf="this.consultationDates">{{this.consultationDates.length}}</h3> <h3 class="d-flex justify-content-center" *ngIf="!this.consultationDates">0</h3>  <!-- count consultations for the day -->
+            <p class="d-flex justify-content-center">Consultations</p>
+            <p class="d-flex justify-content-center">{{d1 | date : "entre dd/MM/yyyy et "}} {{d2 | date : "dd/MM/yyyy"}}</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-6">
+
+        <div class="small-box bg-warning">
+          <div class="inner">
+            <h3 class="d-flex justify-content-center">{{this.prise.length}}</h3>
+            <p class="d-flex justify-content-center" >Rendez-Vous</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-person-add"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+
+
+<!-- charts -->
+
+
+<div class="row d-flex justify-content-center" style="margin-top: 60px">
+  <ngx-charts-line-chart [results]="data"
+  [view]='[700,370]'
+
+  [legend]="legend"
+  [legendTitle]="legendTitleMulti"
+
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
+  [animations]="animations"
+  [showGridLines]="showGridLines">
+
+  </ngx-charts-line-chart>
+</div>

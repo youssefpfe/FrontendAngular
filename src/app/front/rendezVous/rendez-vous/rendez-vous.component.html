@@ -1,0 +1,59 @@
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Un rendez vous</h3>
+  </div>
+  <br>
+  <br>
+  <h2 class="d-flex justify-content-center">Service : {{service.nomService}}</h2>
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+
+      <!--<div class="row" >
+        <div class="col-sm-6" >
+
+          <div class="form-group" >
+            <label>Service Consultation</label>
+            <select class="form-control" formControlName='serv' [(ngModel)]="service" (change)="changingId()">
+              <option *ngFor="let serv of serviceConsultations"  (change)="consultantId=serv.id" [ngValue]="serv"  >{{serv.nomService}}</option>
+
+            </select>
+
+          </div>
+        </div>
+
+      </div>-->
+
+      <div class="row" *ngIf="service!=null">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Consultant</label>
+            <select class="form-control" formControlName='cons' [(ngModel)]="consultantId" (change)="this.cons.emit(consultantId)" >
+              <option *ngFor="let cons of service?.consultants" [ngValue]="cons.id"  >{{cons.nom}} {{cons.prenom}}</option>
+
+            </select>
+          </div>
+        </div>
+      </div>
+<br>
+<br>
+
+ <div class="row  d-flex justify-content-center" *ngIf="consultantId!=null && this.consultantId!=-1 ">
+
+
+          <app-calendrier [consultantId]="consultantId" ></app-calendrier>
+
+
+      </div>
+
+
+
+  <!--    <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 300px" [disabled]='add.invalid' (click)="add(consultant)"/>-->
+      <button class="button-29" style="margin-left: 50%" [routerLink]="['../../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

@@ -1,0 +1,58 @@
+
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Modifier Examen</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="edit">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Nom</label>
+        <input type="text" class="form-control " [ngClass]="(this.edit.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="examen.nomExamen" formControlName='nom' [(ngModel)]="examen.nomExamen">
+        <div *ngIf="this.edit.controls.nom?.invalid && (this.edit.controls.nom?.dirty || this.edit.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.nom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['minlength']">
+            Au moins 2 caractères .
+          </div>
+          <div *ngIf="this.edit.controls.nom?.errors?.['maxlength']">
+            Au plus 20 caractères .
+          </div>
+
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Prix </label>
+        <input type="number" class="form-control " [ngClass]="(this.edit.controls.prix.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="examen.prixExamen" formControlName='prix' [(ngModel)]="examen.prixExamen">
+        <div *ngIf="this.edit.controls.prix?.invalid && (this.edit.controls.prix?.dirty || this.edit.controls.prix?.touched)" style="color:red">
+
+          <div *ngIf="this.edit.controls.prix?.errors?.['required']" >
+            obligatoire
+          </div>
+          <div *ngIf="this.edit.controls.prix?.errors?.['minlength']">
+            au moins 1 numéro .
+          </div>
+          <div *ngIf="this.edit.controls.prix?.errors?.['maxlength']">
+            au plus 15 numéros .
+          </div>
+          <div *ngIf="this.edit.controls.prix?.errors?.['pattern']">
+            ce prix n'est pas valid .
+          </div>
+        </div>
+
+      </div>
+
+
+      <input type="submit" class="button-29" value=" Modifier " style="margin-left: 353px" [disabled]='edit.invalid' (click)="editSalle(examen)"/>
+      <button class="button-29" style="margin-left: 10px" [routerLink]="['../../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

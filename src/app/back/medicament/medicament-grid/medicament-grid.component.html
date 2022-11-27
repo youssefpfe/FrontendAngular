@@ -1,0 +1,49 @@
+<button style="margin-left:37%;margin-top:2%;" class="button-84" [routerLink]="['add']" >Nouveau Medicament</button>
+<div class="card-body">
+
+  <table id="medocs" class="table table-bordered table-hover table-striped"  >
+
+    <thead>
+
+    <tr>
+
+      <th class="testTd" style="display:inline ">
+        Nom
+      </th>
+      <th class="testTd" style="display:inline ">
+        Durée De Prise
+      </th>
+
+      <th class="testTd" style="display:inline ">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd" *ngFor="let e of medicaments">
+
+      <td tabindex="0" class="dtr-control sorting_1 testTd">{{e.nomMedicament}}</td>
+      <td class="testTd">{{e.dureeDePrise}} J</td>
+
+
+      <td class="testTd"><button [routerLink]="['edit',e.id]"  class="button-29"  >Modifier</button> <button class="button-29" style="margin-left:2%;background-image:radial-gradient(100% 100% at 100% 0, red 0, red 100%);" (click)="delete(e.id)">Effacer</button></td>
+    </tr>
+
+    </tbody>
+    <tfoot>
+    <tr>
+
+      <th class="testTd">
+        Nom
+      </th>
+      <th class="testTd">
+        Durée De Prise
+      </th>
+
+      <th class="testTd">Actions</th>
+    </tr>
+    </tfoot>
+  </table>
+</div>
+
+
+
+

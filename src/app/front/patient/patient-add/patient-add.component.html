@@ -1,0 +1,154 @@
+<p-toast ></p-toast>
+
+<div class="mat-typography"><p-toast class="mat-typography" styleClass="custom-toast" ></p-toast></div>
+<div class="card card-warning">
+
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Patient</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Nom</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="nom" formControlName='nom' >
+        <div *ngIf="this.add.controls.nom?.invalid && (this.add.controls.nom?.dirty || this.add.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.nom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['minlength']">
+            Au moins 3 caractères .
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Prenom</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.prenom.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="prenom" formControlName='prenom' >
+        <div *ngIf="this.add.controls.prenom?.invalid && (this.add.controls.prenom?.dirty || this.add.controls.prenom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.prenom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.prenom?.errors?.['minlength']">
+            Au moins 3 caractères .
+          </div>
+
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Email</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.email.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..."  name="email" formControlName='email' >
+
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Domicile</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.domicile.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..." required="required" name="domicile" formControlName='domicile' >
+        <div *ngIf="this.add.controls.domicile?.invalid && (this.add.controls.domicile?.dirty || this.add.controls.domicile?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.domicile?.errors?.['required']" >
+            obligatoire*
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="ph"> Photo</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.photo.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." name="photo" formControlName='photo' >
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="us"> CIN</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.numIdendite.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="numIdendite" formControlName='numIdendite' >
+        <div *ngIf="this.add.controls.numIdendite?.invalid && (this.add.controls.numIdendite?.dirty || this.add.controls.numIdendite?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.numIdendite?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.numIdendite?.errors?.['minlength']">
+            au moins 8 numéros .
+          </div>
+          <div *ngIf="this.add.controls.numIdendite?.errors?.['maxlength']">
+            au plus 8 numéros .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="us"> DateNaissance</label>
+        <input type="date" class="form-control " [ngClass]="(this.add.controls.dateNaissance.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="dateNaissance" formControlName='dateNaissance' >
+        <div *ngIf="this.add.controls.dateNaissance?.invalid && (this.add.controls.dateNaissance?.dirty || this.add.controls.dateNaissance?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.dateNaissance?.errors?.['required']" >
+            obligatoire*
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Genre</label>
+            <select class="form-control" formControlName='genre'>
+              <option    >Homme</option>
+              <option  >Femme</option>
+
+            </select>
+            <div *ngIf="this.add.controls.genre?.invalid && (this.add.controls.genre?.dirty || this.add.controls.genre?.touched)" style="color:red">
+
+              <div *ngIf="this.add.controls.genre?.errors?.['required']" >
+                obligatoire*
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+<div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>est Assuré :</label>
+            <select class="form-control"  formControlName='assure' [(ngModel)]="patient.estAssure">
+              <option  [defaultSelected]="true" [ngValue]="true" >Oui</option>
+              <option [ngValue]="false" >Non</option>
+
+            </select>
+
+            <div *ngIf="this.add.controls.assure?.invalid && (this.add.controls.assure?.dirty || this.add.controls.assure?.touched)" style="color:red">
+
+              <div *ngIf="this.add.controls.assure?.errors?.['required']" >
+                obligatoire*
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group" *ngIf="patient.estAssure">
+        <label class="col-form-label" for="us10"> Taux D'Assurance</label>
+        <input type="number" class="form-control " [ngClass]="(this.add.controls.tauxAssurance.invalid) ? 'is-invalid' : 'is-valid'"   id="us10" placeholder="Entrer ..."  name="tauxAssurance" formControlName='tauxAssurance' >
+      </div>
+
+      <div class="form-group" *ngIf="patient.estAssure">
+        <label class="col-form-label" for="us11"> Numéro D'Affiliation</label>
+        <input type="number" class="form-control " [ngClass]="(this.add.controls.numAffeliation.invalid) ? 'is-invalid' : 'is-valid'"   id="us11" placeholder="Entrer ..."  name="numAffeliation" formControlName='numAffeliation' >
+      </div>
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 40%" [disabled]='add.invalid' (click)="addPatient(patient)"/>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

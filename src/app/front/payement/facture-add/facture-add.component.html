@@ -1,0 +1,228 @@
+<p-toast xmlns="http://www.w3.org/1999/html"></p-toast>
+<div class="wrapper" *ngIf="this.imprim" >
+  <div class="link_wrapper">
+    <a id="retourB" [routerLink]="['../']">Retour</a>
+    <div class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
+        <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z"/>
+      </svg>
+    </div>
+  </div>
+
+</div>
+<div class="container mt-5 mb-3 " id="pdfTable" #pdfTable *ngIf="!this.priseRdv.payed">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="d-flex flex-row p-2">
+          <div class="d-flex justify-content-center flex-column " style="margin:auto"> <span class=" font-weight-bold"  style="margin:auto">Facture</span> <small style="margin:auto">Hôpital Militaire Principal D'Instruction de Tunis</small> </div>
+
+        </div>
+
+        <hr>
+        <div class="table-responsive p-2">
+          <table class="table table-borderless">
+            <tbody>
+
+            <tr class="content">
+              <td class="font-weight-bold"> Date Consultation: {{priseRdv.dateRDV |date:"yyyy-MM-dd HH:mm:ss"}} <br>
+                Date de prise du rendez vous : {{priseRdv.postedAt |date:"yyyy-MM-dd HH:mm:ss"}}
+              <br>Prestation : {{priseRdv.examen.nomExamen}}
+              <br>Service de Consultation : {{priseRdv.serviceConsultation.nomService}}
+              </td>
+              <td class="font-weight-bold"> <br> Patient: {{priseRdv.patient.nom}} {{priseRdv.patient.prenom}} <br> Medecin: {{priseRdv.consultant.nom}} {{priseRdv.consultant.prenom}} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+        <div class="products p-2">
+          <table class="table table-borderless">
+            <tbody>
+            <tr class="add">
+              <td class="text-center">Prestation</td>
+              <td class="text-center">Prix</td>
+              <td class="text-center">Prix aprés assurance</td>
+              <td class="text-center">Type de payment</td>
+              <td class="text-center">Somme Reçue</td>
+              <td class="text-center">Somme a Rendre</td>
+              <!--<td class="text-center">Total</td>-->
+            </tr>
+            <tr class="content" [formGroup]="add">
+              <td class="text-center">{{priseRdv.examen.nomExamen}}</td>
+              <td class="text-center">{{priseRdv.examen.prixExamen}} DT</td>
+              <td class="text-center" >{{priseRdv.examen.prixExamen*(1-priseRdv.patient.tauxAssurance) |number}} DT</td>
+              <td class="text-center" width="16.4%">
+
+                <select class="form-control" formControlName='type' (change)="cheque()">
+                  <option  [defaultSelected]="true" >espèce</option>
+                  <option     >chèque</option>
+                </select>
+
+              </td>
+              <td class="text-center" ><input id="rec"  type="number" required style="width:50%;margin-left:10%" name="recue" formControlName='sommeRecue' [(ngModel)]="this.recue" (change)="aRendrefct()" (ngModelChange)="aRendrefct()"/>DT
+                <div *ngIf="this.add.controls.sommeRecue?.invalid && (this.add.controls.sommeRecue?.dirty || this.add.controls.sommeRecue?.touched)" style="color:red">
+
+                  <div *ngIf="this.add.controls.sommeRecue?.errors?.['required']" >
+                    obligatoir*
+                  </div>
+
+
+                </div>
+
+              </td>
+              <td class="text-center" [ngClass]="(this.aRendre  <=-0.001) ? 'red' : 'null'">{{aRendre | number}} DT</td>
+
+
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <hr>
+        <!--<div class="products p-2">
+          <table class="table table-borderless">
+            <tbody>
+            <tr class="add">
+              <td></td>
+              <td>Subtotal</td>
+              <td>GST(10%)</td>
+              <td class="text-center">Total</td>
+            </tr>
+            <tr class="content">
+              <td></td>
+              <td>$40,000</td>
+              <td>2,500</td>
+              <td class="text-center">$42,500</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>-->
+        <hr>
+        <div class="address p-2">
+          <table class="table table-borderless">
+            <tbody>
+            <tr class="add">
+              <td>Details Payment </td>
+            </tr>
+            <tr class="content">
+              <td> Payment effectué par : {{userInfo?.nom}} {{userInfo?.prenom}}
+              </td>
+              <td  class="d-flex justify-content-end"> Date : {{date|date:"yyyy-MM-dd HH:mm:ss"}} </td>
+            </tr>
+            </tbody>
+          </table>
+          <button type="submit" class="btn btn-primary" value=" Ajouter " style="margin-left:45%" [disabled]='add.invalid || this.aRendre<=-0.001' (click)="addFacture(facture)">Ajouter</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="container mt-5 mb-3" id="pdfTable" #pdfTable *ngIf="this.priseRdv.payed">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <hr>
+        <div class="d-flex flex-row p-2">
+          <div class="d-flex flex-column " style="margin:auto"> <span class=" font-weight-bold"  style="margin:auto">Facture</span> <small style="margin:auto">Hôpital Militaire Principal D'Instruction de Tunis</small> </div>
+
+        </div>
+
+        <hr>
+        <div class="table-responsive p-2">
+          <table class="table table-borderless">
+            <tbody>
+
+            <tr class="content">
+              <td class="font-weight-bold"> Date Consultation: {{priseRdv.dateRDV |date:"yyyy-MM-dd HH:mm:ss"}} <br>
+                Date de prise du rendez vous : {{priseRdv.postedAt |date:"yyyy-MM-dd HH:mm:ss"}}
+              <br>Prestation : {{priseRdv.examen.nomExamen}}
+              <br>Service de Consultation : {{priseRdv.serviceConsultation.nomService}}
+              </td>
+              <td class="font-weight-bold"> <br> Patient: {{priseRdv.patient.nom}} {{priseRdv.patient.prenom}} <br> Medecin: {{priseRdv.consultant.nom}} {{priseRdv.consultant.prenom}} </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
+        <div class="products p-2">
+          <table class="table table-borderless">
+            <tbody>
+            <tr class="add">
+              <td class="text-center">Prestation</td>
+              <td class="text-center">Prix Pour Non Assuré</td>
+              <td class="text-center">Prix Pour Assuré</td>
+              <td class="text-center">Type de payment</td>
+              <td class="text-center">Somme Reçue</td>
+              <td class="text-center">Somme Rendue</td>
+              <!--<td class="text-center">Total</td>-->
+            </tr>
+            <tr class="content" [formGroup]="add">
+              <td class="text-center">{{priseRdv.examen.nomExamen}}</td>
+              <td class="text-center">{{priseRdv.examen.prixExamen}} DT</td>
+              <td class="text-center" >{{priseRdv.examen.prixExamen*(1-priseRdv.patient.tauxAssurance) |number}} DT</td>
+              <td class="text-center" >
+
+                {{this.factureprint.typePaiement}}
+
+              </td>
+              <td class="text-center" > {{this.factureprint.sommeRecue}} DT
+
+
+              </td>
+              <td class="text-center" >{{this.factureprint.sommeRendue | number}} DT</td>
+
+
+            </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+        <hr>
+
+        <hr>
+        <div class="address p-2">
+          <table class="table table-borderless">
+            <tbody>
+            <tr class="add">
+              <td>Details Payment </td>
+            </tr>
+            <tr class="content">
+              <td> Payment effectué par : {{userInfo?.nom}} {{userInfo?.prenom}} </td>
+              <td class="d-flex justify-content-end"> Date : {{date|date:"yyyy-MM-dd HH:mm:ss"}} </td>
+            </tr>
+            </tbody>
+
+          </table>
+           <span class ="d-flex justify-content-center font-weight-bold" style="font-size:13px ">Signature Du Patient:</span> <br><br><br><br>
+
+          <hr>
+          <!--<input *ngIf="this.imprim" type="submit" class="button-29" value=" Imprimer " style="margin-left: 300px" (click)="print()"/>-->
+          <div class="container" id="bod" *ngIf="this.imprim" (click)="print()">
+            <div class="center">
+              <button class="btn" id="imbtn">
+                <svg width="140px" height="40px" viewBox="0 0 180 60" class="border">
+                  <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
+                  <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
+                </svg>
+                <span>IMPRIMER</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

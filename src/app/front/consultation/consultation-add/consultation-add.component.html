@@ -1,0 +1,81 @@
+<div class="card card-warning" style="width:80%;margin:3% auto ">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Consultation</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add" [hidden]="!this.hideaj">
+
+      <div class="form-group" >
+        <label class="col-form-label" for="no"> Date Consultation</label>
+        <input type="datetime-local" class="form-control" [ngClass]="(this.add.controls.date.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="date" formControlName='date' [disabled]="!this.hideaj" >
+      </div>
+      <div class="form-group" >
+        <label class="col-form-label" for="pr"> Type Consultation</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.type.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="type" formControlName='type' >
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Diagnostic</label>
+        <input type="text" class="form-control "  [ngClass]="(this.add.controls.diagnostic.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="diagnostic" formControlName='diagnostic' >
+      </div>
+
+
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 30%" [disabled]='add.invalid' [hidden]="!this.hideaj" (click)="addConsultation(consultation)"/>
+      <button class="button-29" style="margin-left: 20px"  [disabled]="!this.addordonnance" (click)="this.hideaj=false " >Ajouter Ordonnance</button>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+
+
+
+    <form role="form" [formGroup]="addord" [hidden]="this.hideaj">
+
+      <div class="card-header">
+        <h3 class="card-title">Ajouter Ordonnance</h3>
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="pr"> Nature</label>
+        <input type="text" class="form-control "  [ngClass]="(this.addord.controls.nature.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="nature" formControlName='nature' >
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="pr"> Examen(s)</label>
+      <div style="width:50%">
+        <ng-multiselect-dropdown
+          [placeholder]="'Selectionner Examen(s)'"
+          [settings]="dropdownSettingsE"
+          [data]="examens"
+
+          formControlName="myExamens">
+        </ng-multiselect-dropdown>
+      </div>
+      </div>
+
+      <div class="form-group" >
+        <label class="col-form-label" for="pr"> Medicament(s)</label>
+      <div style="width:50%">
+        <ng-multiselect-dropdown
+          [placeholder]="'Selectionner Medicament(s)'"
+          [settings]="dropdownSettingsM"
+          [data]="medicaments"
+          formControlName="myMedicaments">
+          >
+        </ng-multiselect-dropdown>
+      </div>
+      </div>
+
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 41%" [disabled]='addord.invalid' [hidden]="this.hideaj" (click)="addOrdonnance(this.ordonnance)" />
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+
+
+    </form>
+
+
+
+  </div>
+
+</div>

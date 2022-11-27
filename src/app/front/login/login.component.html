@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+<div class="row" style="margin-left: 400px; margin-top: 100px;">
+  <div class="col-md-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Login</h3>
+      </div>
+      <form role="form">
+        <div class="card-body">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter username" name="loginUser.username" [(ngModel)]='loginUser.username'>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="loginUser.password" [(ngModel)] = 'loginUser.password'>
+          </div>
+
+        </div>
+        <div class="card-footer" style="margin-left:38%">
+          <button type="submit" (click)="login()" class="btn btn-primary" >Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>

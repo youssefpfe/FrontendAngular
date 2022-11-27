@@ -1,0 +1,67 @@
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Ajout Service Consultation</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Nom Du Service</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="nom" formControlName='nom' >
+        <div *ngIf="this.add.controls.nom?.invalid && (this.add.controls.nom?.dirty || this.add.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.nom?.errors?.['required']" >
+            obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['minlength']">
+            Au moins 4 caractères .
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Type Du Service </label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.type.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="type" formControlName='type' >
+        <div *ngIf="this.add.controls.type?.invalid && (this.add.controls.type?.dirty || this.add.controls.type?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.type?.errors?.['required']" >
+            Obligatoire*
+          </div>
+          <div *ngIf="this.add.controls.type?.errors?.['minlength']">
+            Au moins 4 caractères .
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Salle D'attente</label>
+            <select class="form-control" formControlName='salle'>
+              <option *ngFor="let sal of salleAttentes" [ngValue]="sal.id"  >{{sal.nom}}</option>
+
+            </select>
+            <div *ngIf="this.add.controls.salle?.invalid && (this.add.controls.salle?.dirty || this.add.controls.salle?.touched)" style="color:red">
+
+              <div *ngIf="this.add.controls.salle?.errors?.['required']" >
+                obligatoire*
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 300px" [disabled]='add.invalid' (click)="addService(serviceConsultation)"/>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

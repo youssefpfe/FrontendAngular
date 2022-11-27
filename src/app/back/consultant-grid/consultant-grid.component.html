@@ -1,0 +1,57 @@
+<button style="margin-left:37%;margin-top:2%;" class="button-84" [routerLink]="['add']" >Nouveau Consultant</button>
+  <div class="card-body">
+
+    <table id="TD" class="table table-bordered table-hover table-striped"  >
+
+      <thead>
+
+      <tr >
+        <th class="testTd" style="display:flex ">Photo</th>
+        <th class="testTd" style="display:inline ">
+          Nom
+          </th>
+        <th class="testTd" style="display:inline ">
+          Prenom
+          </th>
+        <th class="testTd" style="display:inline ">
+          Email
+          </th>
+        <th class="testTd" style="display:inline ">
+          Telephone
+          </th>
+        <th class="testTd" style="display:inline;width:25% ">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd" *ngFor="let c of consultants">
+        <td  tabindex="0" width="7%"><img  style="width:80%;border-radius:10px;box-shadow: 0px 0px 15px -7px rgba(0,0,0,0.75);cursor: pointer;object-fit:cover" src={{c.photo}}/></td>
+        <td class="dtr-control sorting_1 testTd" ><span style="display:block">{{c.nom}}</span></td>
+        <td class="testTd" ><span style="display:block">{{c.prenom}}</span></td>
+        <td class="testTd" ><span style="display:block">{{c.email}}</span></td>
+        <td class="testTd" ><span style="display:block">{{c.telephone}}</span></td>
+        <td ><button class="testTd" style="display:inline ;margin-left:13%" [routerLink]="['edit',c.id]"  class="button-29"  >Modifier</button> <button class="button-29" style="margin-left:2%;background-image:radial-gradient(100% 100% at 100% 0, red 0, red 100%);" (click)="delete(c.id)">Effacer</button></td>
+      </tr>
+
+      </tbody>
+      <tfoot>
+      <tr>
+        <th class="testTd">Photo</th>
+        <th class="testTd">
+          Nom
+        </th>
+        <th class="testTd">
+          Prenom
+        </th>
+        <th class="testTd">
+          Email
+        </th>
+        <th class="testTd">
+          Telephone
+        </th>
+        <th class="testTd" style="width:25%">Actions</th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+

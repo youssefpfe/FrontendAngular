@@ -1,0 +1,186 @@
+<div class="card card-warning">
+  <p-toast></p-toast>
+  <p-toast position="top-right" key="tl"></p-toast>
+  <div class="card-header">
+    <h3 class="card-title">Ajouter Personnel Medical</h3>
+  </div>
+
+  <div class="card-body">
+    <form role="form" [formGroup]="add">
+
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Username</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.username.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="username" formControlName='username' >
+        <div *ngIf="this.add.controls.username?.invalid && (this.add.controls.username?.dirty || this.add.controls.username?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.username?.errors?.['required']" >
+            Nom D'utilisateur est obligatoire
+          </div>
+          <div *ngIf="this.add.controls.username?.errors?.['minlength']">
+            Nom D'utilisateur au moins 4 caractères .
+          </div>
+          <div *ngIf="this.add.controls.username?.errors?.['maxlength']">
+            Nom D'utilisateur au plus 50 caractères .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="us"> Mot de passe</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.password.invalid) ? 'is-invalid' : 'is-valid'"   id="us" placeholder="Entrer ..." required="required" name="password" formControlName='password' >
+        <div *ngIf="this.add.controls.password?.invalid && (this.add.controls.password?.dirty || this.add.controls.password?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.password?.errors?.['required']" >
+            Mot De Passe est obligatoire
+          </div>
+          <div *ngIf="this.add.controls.password?.errors?.['minlength']">
+            Mot De Passe au moins 8 caractères .
+          </div>
+          <div *ngIf="this.add.controls.password?.errors?.['maxlength']">
+            Mot De Passe au plus 50 caractères .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="no"> Nom</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.nom.invalid) ? 'is-invalid' : 'is-valid'"   id="no" placeholder="Entrer ..." required="required" name="nom" formControlName='nom' >
+        <div *ngIf="this.add.controls.nom?.invalid && (this.add.controls.nom?.dirty || this.add.controls.nom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.nom?.errors?.['required']" >
+            Nom  est obligatoire
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['minlength']">
+            Nom  au moins 3 caractères .
+          </div>
+          <div *ngIf="this.add.controls.nom?.errors?.['maxlength']">
+            Nom  au plus 30 caractères .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="pr"> Prenom</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.prenom.invalid) ? 'is-invalid' : 'is-valid'"   id="pr" placeholder="Entrer ..." required="required" name="prenom" formControlName='prenom' >
+        <div *ngIf="this.add.controls.prenom?.invalid && (this.add.controls.prenom?.dirty || this.add.controls.prenom?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.prenom?.errors?.['required']" >
+            Prenom  est obligatoire
+          </div>
+          <div *ngIf="this.add.controls.prenom?.errors?.['minlength']">
+            Prenom  au moins 3 caractères .
+          </div>
+          <div *ngIf="this.add.controls.prenom?.errors?.['maxlength']">
+            Prenom  au plus 30 caractères .
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Email</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.email.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..." required="required" name="email" formControlName='email' >
+        <div *ngIf="this.add.controls.email?.invalid && (this.add.controls.email?.dirty || this.add.controls.email?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.email?.errors?.['required']" >
+            Email  est obligatoire
+          </div>
+          <div *ngIf="this.add.controls.email?.errors?.['email']">
+            Ce Mail N'est Pas Valide
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="em"> Télephone</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.telephone.invalid) ? 'is-invalid' : 'is-valid'"   id="em" placeholder="Entrer ..." required="required" name="telephone" formControlName='telephone' >
+        <div *ngIf="this.add.controls.telephone?.invalid && (this.add.controls.telephone?.dirty || this.add.controls.telephone?.touched)" style="color:red">
+
+          <div *ngIf="this.add.controls.telephone?.errors?.['required']" >
+            Obligatoire *
+          </div>
+          <div *ngIf="this.add.controls.telephone?.errors?.['minlength']">
+            Entrez 8 Numéros au moins.
+          </div>
+          <div *ngIf="this.add.controls.telephone?.errors?.['maxlength']">
+            Entrez 12 Numéros Au Plus.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-form-label" for="ph"> Photo</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.photo.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..."  name="photo" formControlName='photo' >
+
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Titre</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.titre.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="titre" formControlName='titre' >
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Fonction</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.fonction.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="fonction" formControlName='fonction' >
+      </div>
+<div class="form-group">
+        <label class="col-form-label" for="ph"> Service</label>
+        <input type="text" class="form-control " [ngClass]="(this.add.controls.service.invalid) ? 'is-invalid' : 'is-valid'"   id="ph" placeholder="Entrer ..." required="required" name="service" formControlName='service' >
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Accueil</label>
+            <select class="form-control" formControlName='acc'>
+              <option *ngFor="let ac of acceuils" [ngValue]="ac.id"  >{{ac.nom}}</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Salle D'attente</label>
+            <select class="form-control" formControlName='salle'>
+              <option *ngFor="let sa of salleAttentes" [ngValue]="sa.id"  >{{sa.nom}}</option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Service Consultation</label>
+            <select class="form-control" formControlName='serv'>
+              <option *ngFor="let serv of serviceConsultations" [ngValue]="serv.id"  >{{serv.nomService}}</option>
+
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+
+          <div class="form-group">
+            <label>Role</label>
+            <select class="form-control" formControlName='rol'>
+              <option *ngFor="let role of roles" [ngValue]="role"  >{{role}}</option>
+
+            </select>
+
+            <div *ngIf="this.add.controls.rol?.invalid && (this.add.controls.rol?.dirty || this.add.controls.rol?.touched)" style="color:red">
+
+              <div *ngIf="this.add.controls.rol?.errors?.['required']" >
+                Role Obligatoire !
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <input type="submit" class="button-29" value=" Ajouter " style="margin-left: 300px" [disabled]='add.invalid' (click)="addPersonnel(personnel)"/>
+      <button class="button-29" style="margin-left: 20px" [routerLink]="['../']" >Retour</button>
+    </form>
+  </div>
+
+</div>

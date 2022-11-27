@@ -1,0 +1,103 @@
+<div class="container">
+
+  <form role="form" >
+
+    <div class="d-flex justify-content-around mb-5" style="margin :auto;width:60%">
+      <div class="form-outline col-5 mt-5">
+        <label class="form-label" for="startDate">Date debut :</label>
+        <input class="form-control form-control-lg" type="date" name="startDate" id="startDate" [(ngModel)]="d1">
+      </div>
+
+      <div class="form-outline col-5 mt-5">
+        <label class="form-label" for="endDate">Date fin :</label>
+        <input class="form-control form-control-lg" type="date" name="endDate" id="endDate" (change)="verifyDate()" [(ngModel)]="d2">
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <button type="submit" class="btn btn-primary col-2"  (click)="getAssurancesByDate(d1,d2)">
+        Rechercher
+      </button>
+    </div>
+  </form>
+
+
+
+
+<div class="card-body">
+<br>
+  <!--<div class=" d-flex justify-content-end">
+<button class="btn btn-danger" (click)="deleteAll()">Effacer Tout</button>
+  </div>-->
+
+
+  <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap5">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+
+</div>
+    </div>
+
+
+
+    <div class=" d-flex justify-content-center">
+      <h4 >{{d1 | date:"\'E'ntre le : dd/MM/yyyy et "}}{{d2 | date:"dd/MM/yyyy"}}</h4>
+    </div>
+
+
+  <table id="assurances" class="table table-bordered table-hover table-striped "  >
+    <thead>
+
+    <tr>
+
+      <th class="testTd" >
+        Nom
+      </th>
+      <th class="testTd" >
+        Prenom
+      </th>
+      <th class="testTd" >
+        CIN
+      </th>
+      <th class="testTd" >
+        Numéro D'Affiliation
+      </th>
+      <th class="testTd" >
+        Prestation
+      </th>
+      <th class="testTd" >
+        Montant
+      </th>
+      <th class="testTd" >
+        Date Prestation
+      </th>
+
+      <!--<th  class="testTd" >Actions</th>-->
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd" *ngFor="let a of assurances">
+
+      <td tabindex="0" class="dtr-control sorting_1 testTd">{{a.nomPatient}}</td>
+      <td class="testTd">{{a.prenomPatient}}</td>
+      <td class="testTd">{{a.identitePatient}}</td>
+      <td class="testTd">{{a.numAffeliation}}</td>
+      <td class="testTd">{{a.typePrestation}}</td>
+      <td class="testTd">{{a.montantConvention | number}} DT</td>
+      <td class="testTd">{{a.datePrestation | date : "dd/MM/yyyy"}}</td>
+
+
+
+      <!--<td class="testTd"> <button class="button-29" style="margin-left:2%" (click)="delete(a.id)">Effacer</button></td>-->
+    </tr>
+
+    </tbody>
+
+  </table>
+    </div>
+  </div>
+</div>
+
+
+
+

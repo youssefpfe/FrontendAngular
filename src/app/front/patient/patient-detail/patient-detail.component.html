@@ -1,0 +1,40 @@
+<button class="btn btn-dark" style="margin-left:15%;margin-top:1%" [routerLink]="['../../']" >Retour</button>
+
+<div class="d-flex justify-content-around container mt-5" >
+
+  <div class="card p-5 bg-white" style="width:40%">
+    <div class="about-product text-center mt-2">
+      <div>
+        <h4>{{patient.nom}} {{patient.prenom}}</h4>
+        <h6 class="mt-0 text-black-50">...</h6>
+      </div>
+    </div>
+
+    <div class="stats mt-3">
+      <div class="d-flex justify-content-lg-between "><span>Date Naissance</span><span> {{patient.dateNaissance}}</span></div>
+      <div class="d-flex justify-content-between p-price"><span>Genre</span><span>{{patient.genre}}</span></div>
+      <div class="d-flex justify-content-between p-price" ><span>Assuré</span><span *ngIf="patient.estAssure">OUI</span> <span *ngIf="!patient.estAssure">NON</span></div>
+      <div class="d-flex justify-content-between p-price"><span>Premiére Visite</span><span>{{patient.postedAt}}</span></div>
+      <div class="d-flex justify-content-between p-price"><span>Email</span><span>{{patient.email}}</span></div>
+      <div class="d-flex justify-content-between p-price"><span>Status</span><span>{{this.patient.detailsPatient?.status}}</span></div>
+      <div class="d-flex justify-content-between font-weight-bold p-price"><span>Etat</span><span >{{patient.detailsPatient?.etatDuPatient}}</span></div>
+      <div class="d-flex justify-content-between p-price"><span>Prise en charge</span><span>{{patient.detailsPatient?.heurePriseCharge | date:'yyyy-MM-dd HH:mm:ss'}}</span></div>
+    </div>
+
+  </div>
+
+  <div class="card p-5 bg-white" style="width:30%">
+    <div class="about-product text-center mt-2">
+      <div>
+        <h4>Dossier Medical</h4>
+        <h6>...</h6>
+      </div>
+    </div>
+    <div class="stats mt-2">
+      <div class="d-flex justify-content-between p-price" *ngFor="let d of dossierMedicals" [routerLink]="[d.id]" ><span>Service : </span><span><strong>{{d.serviceConsultation.nomService}}</strong></span></div>
+
+      <a [routerLink]="['ajoutdossier']"  style="margin:auto;padding: 0;border: none;background: none;" *ngIf="this.ajout && this.rdv.payed"><i class="fa fa-plus-square-o" aria-hidden="false"></i> Nouveau Dossier</a>
+    </div>
+
+  </div>
+</div>
