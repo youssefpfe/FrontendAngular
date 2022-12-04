@@ -1,4 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+ // baseUrl : '/spring'
 };
-export const baseUrl = "http://localhost:8888";
+export const baseUrl = "/spring";
