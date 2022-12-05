@@ -2,13 +2,13 @@ version: '3'
 
 services:
   eureka-server:
-    image: riadhyahyaoui/riadhapps:eureka-server
+    image: youssefpfe/pfeapps:eureka.4
     container_name: eureka-server
     restart: on-failure
     ports:
       - "8761:8761"
   gateway:
-    image: riadhyahyaoui/riadhapps:maingatway
+    image: youssefpfe/pfeapps:gateway.8
     container_name: gateway
     restart: on-failure
     depends_on:
@@ -19,7 +19,7 @@ services:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
 
   relationship:
-    image: riadhyahyaoui/riadhapps:relationshipmain
+    image: youssefpfe/pfeapps:hopital.17
     container_name: relationship
     restart: on-failure
     depends_on:
@@ -30,7 +30,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
   assurance:
-    image: riadhyahyaoui/riadhapps:insurancemain
+    image: youssefpfe/pfeapps:assurance.6
     container_name: assurance
     restart: on-failure
     depends_on:
@@ -41,7 +41,7 @@ services:
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
   angular:
-    image: riadhyahyaoui/riadhapps:frontend
+    image: youssefpfe/pfeapps:angular
     container_name: angular
     restart: on-failure
     ports:
