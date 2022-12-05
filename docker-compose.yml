@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  eureka-server:
+    image: riadhyahyaoui/riadhapps:eureka-server
+    container_name: eureka-server
+    restart: on-failure
+    ports:
+      - "8761:8761"
+  gateway:
+    image: riadhyahyaoui/riadhapps:maingatway
+    container_name: gateway
+    restart: on-failure
+    depends_on:
+      - eureka-server
+    ports:
+      - "8888:8888"
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+
+  relationship:
+    image: riadhyahyaoui/riadhapps:relationshipmain
+    container_name: relationship
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+  assurance:
+    image: riadhyahyaoui/riadhapps:insurancemain
+    container_name: assurance
+    restart: on-failure
+    depends_on:
+      - eureka-server
+      - gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+  angular:
+    image: riadhyahyaoui/riadhapps:frontend
+    container_name: angular
+    restart: on-failure
+    ports:
+      - "4200:80"
