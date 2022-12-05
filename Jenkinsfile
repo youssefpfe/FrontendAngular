@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+  tools {
+        nodejs "18.12.1"
+    }
     environment {
 
             // This can be nexus3 or nexus2
@@ -31,8 +33,8 @@ pipeline {
 
         stage('Build'){
             steps {
-
-                // Maven build .
+                sh "npm install -g @angular/cli"
+                sh "npm install"
                 sh "ng build"
 
             }
