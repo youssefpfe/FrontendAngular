@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthenticationRequest} from "../../common/user/AuthenticationRequest";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Utilisateur} from "../../common/Utilisateur";
-import {baseUrl} from "../../../environments/environment";
+//import {baseUrl} from "../../../environments/environment";
 import {environment} from "../../../environments/environment.prod";
 
 @Injectable({

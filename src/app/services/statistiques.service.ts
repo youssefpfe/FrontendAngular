@@ -6,7 +6,7 @@ import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {Utilisateur} from "../common/Utilisateur";
 import {SignupRequest} from "../common/user/SignupRequest";
 import {PriseRdv} from "../common/PriseRdv";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({

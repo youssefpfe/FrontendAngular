@@ -5,7 +5,7 @@ import {Patient} from "../common/Patient";
 import {PatientRequest} from "../common/PatientRequest";
 import {DetailsPatient} from "../common/DetailsPatient";
 import {DetailsPatientRequest} from "../common/DetailsPatientRequest";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({

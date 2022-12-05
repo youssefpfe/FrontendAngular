@@ -4,7 +4,7 @@ import {Observable, Subject} from "rxjs";
 import {Consultant} from "../common/Consultant";
 
 import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 @Injectable({
   providedIn: 'root'

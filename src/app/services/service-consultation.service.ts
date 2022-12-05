@@ -5,7 +5,7 @@ import {ServiceConsultation} from "../common/ServiceConsultation";
 import {Consultant} from "../common/Consultant";
 import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {ServiceConsultationRequest} from "../common/ServiceConsultationRequest";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({

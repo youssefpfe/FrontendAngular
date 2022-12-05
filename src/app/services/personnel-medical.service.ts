@@ -5,7 +5,7 @@ import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SignupRequestPersonnelMedical} from "../common/user/SignupRequestPersonnelMedical";
 import {PersonnelMedical} from "../common/PersonnelMedical";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({

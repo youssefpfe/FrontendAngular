@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ServiceConsultation} from "../common/ServiceConsultation";
 import {SalleAttente} from "../common/SalleAttente";
 import {ServiceConsultationRequest} from "../common/ServiceConsultationRequest";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({

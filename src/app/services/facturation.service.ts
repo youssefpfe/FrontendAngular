@@ -5,7 +5,7 @@ import {Ordonnance} from "../common/Ordonnance";
 import {OrdonnanceRequest} from "../common/OrdonnanceRequest";
 import {Facturation} from "../common/Facturation";
 import {FacturationRequest} from "../common/FacturationRequest";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
 import {environment} from "../../environments/environment.prod";
 
 @Injectable({
