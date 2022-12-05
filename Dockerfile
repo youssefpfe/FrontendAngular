@@ -1,7 +1,7 @@
 FROM node:latest as build-stage
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm i --legacy-peer-deps
 COPY ./ .
 FROM nginx:latest
 RUN mkdir /app
