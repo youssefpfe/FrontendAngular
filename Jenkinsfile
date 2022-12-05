@@ -34,7 +34,7 @@ pipeline {
         stage('Build'){
             steps {
                 sh "npm install -g @angular/cli"
-                sh "npm install"
+                sh "npm i --legacy-peer-deps"
                 sh "ng build"
 
             }
