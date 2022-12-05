@@ -65,18 +65,18 @@ pipeline {
                    }
                }
 
-     /*   stage('Deploy on docker compose '){
+       stage('Deploying the app '){
             steps {
 
                 echo "Deploying"
-
+                sh "docker-compose down"
                 sh "docker-compose up -d"
 
 
 
             }
 
-        }*/
+        }
 
     }
 }
