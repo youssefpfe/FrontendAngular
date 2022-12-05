@@ -6,6 +6,7 @@ import {ExamenRequest} from "../common/ExamenRequest";
 import {DossierMedical} from "../common/DossierMedical";
 import {DossierMedicalRequest} from "../common/DossierMedicalRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import {baseUrl} from "../../environments/environment";
 export class DossierMedicalService {
 
 
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -22,7 +24,7 @@ export class DossierMedicalService {
 
 
   getDossierMedicalList(): Observable<DossierMedical[]> {
-    return this.httpClient.get<DossierMedical[]>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/getAll', {
+    return this.httpClient.get<DossierMedical[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -30,7 +32,7 @@ export class DossierMedicalService {
     });
   }
   getPatientDossierMedicalList(id: any): Observable<DossierMedical[]> {
-    return this.httpClient.get<DossierMedical[]>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/patientdossiers/'+ id, {
+    return this.httpClient.get<DossierMedical[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/patientdossiers/'+ id, {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -39,7 +41,7 @@ export class DossierMedicalService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -48,7 +50,7 @@ export class DossierMedicalService {
   }
 
   getDossierMedicalById(id: string|null): Observable<DossierMedical> {
-    return this.httpClient.get<DossierMedical>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/get/' + id,{
+    return this.httpClient.get<DossierMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -59,7 +61,7 @@ export class DossierMedicalService {
 
   editDossierMedical(s: DossierMedicalRequest): Observable<DossierMedical> {
     console.log(s);
-    return this.httpClient.put<DossierMedical>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/edit/'+s.id, s,{
+    return this.httpClient.put<DossierMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -68,7 +70,7 @@ export class DossierMedicalService {
   }
   addDossierMedical(s: DossierMedicalRequest): Observable<DossierMedical> {
     console.log(s);
-    return this.httpClient.post<DossierMedical>(baseUrl + '/RELATIONSHIP-SERVICE/dossierMedical/add', s,{
+    return this.httpClient.post<DossierMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/dossierMedical/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

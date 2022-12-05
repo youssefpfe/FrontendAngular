@@ -7,6 +7,7 @@ import {Utilisateur} from "../common/Utilisateur";
 import {SignupRequest} from "../common/user/SignupRequest";
 import {PriseRdv} from "../common/PriseRdv";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +18,10 @@ export class StatistiqueService{
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
   getCountAssuree():Observable<any>{
-    return this.httpClient.get(baseUrl + '/RELATIONSHIP-SERVICE/Patient/getCount',{
+    return this.httpClient.get(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/getCount',{
       withCredentials:true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -28,7 +30,7 @@ export class StatistiqueService{
   }
 
   getConsultationsByServices():Observable<any[]>{
-    return this.httpClient.get<any[]>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/getByServices',{
+    return this.httpClient.get<any[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/getByServices',{
       withCredentials:true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -36,7 +38,7 @@ export class StatistiqueService{
     })
   }
   getConsultationsByDates(d1:any,d2:any):Observable<any[]>{
-    return this.httpClient.get<any[]>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/getByDates/'+d1+'/'+d2,{
+    return this.httpClient.get<any[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/getByDates/'+d1+'/'+d2,{
       withCredentials:true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -45,7 +47,7 @@ export class StatistiqueService{
   }
 
   getPriseRDVSByDates(d1:any,d2:any):Observable<PriseRdv[]>{
-    return this.httpClient.get<PriseRdv[]>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/getByDates/'+d1+'/'+d2,{
+    return this.httpClient.get<PriseRdv[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/getByDates/'+d1+'/'+d2,{
       withCredentials:true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

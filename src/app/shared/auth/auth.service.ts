@@ -4,11 +4,13 @@ import {AuthenticationRequest} from "../../common/user/AuthenticationRequest";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Utilisateur} from "../../common/Utilisateur";
 import {baseUrl} from "../../../environments/environment";
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  baseUrl=environment.baseUrl;
 
   userProfile:BehaviorSubject<Utilisateur> = new BehaviorSubject<Utilisateur>({
     email: '',
@@ -26,7 +28,7 @@ uservalue:BehaviorSubject<Utilisateur> = new BehaviorSubject<Utilisateur>(JSON.p
 
   login(c: AuthenticationRequest):Observable<Utilisateur>  {
 
-    return this.http.post<Utilisateur>(baseUrl + '/RELATIONSHIP-SERVICE/api/auth/signin', c,{
+    return this.http.post<Utilisateur>(this.baseUrl  + '/RELATIONSHIP-SERVICE/api/auth/signin', c,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -38,7 +40,7 @@ uservalue:BehaviorSubject<Utilisateur> = new BehaviorSubject<Utilisateur>(JSON.p
    /* console.log(this.http.get<Utilisateur>('http://localhost:8080/utilisateur/get/'+id, {
       withCredentials: true,
     }));*/
-    return this.http.get<Utilisateur>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/get/'+id, {
+    return this.http.get<Utilisateur>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/get/'+id, {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -67,7 +69,7 @@ uservalue:BehaviorSubject<Utilisateur> = new BehaviorSubject<Utilisateur>(JSON.p
 
   logout(){
     localStorage.removeItem('user-profile');
-    return this.http.post(baseUrl + '/RELATIONSHIP-SERVICE/api/auth/signout',{},{
+    return this.http.post(this.baseUrl  + '/RELATIONSHIP-SERVICE/api/auth/signout',{},{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

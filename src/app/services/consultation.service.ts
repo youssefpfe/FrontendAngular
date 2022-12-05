@@ -8,11 +8,13 @@ import {DetailsPatientRequest} from "../common/DetailsPatientRequest";
 import {Consultation} from "../common/Consultation";
 import {ConsultationRequest} from "../common/ConsultationRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultationService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -22,7 +24,7 @@ export class ConsultationService {
 
 
   getConsultationsList(): Observable<Consultation[]> {
-    return this.httpClient.get<Consultation[]>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/getAll', {
+    return this.httpClient.get<Consultation[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -30,7 +32,7 @@ export class ConsultationService {
     });
   }
   getConsultationsByDossier(id:any): Observable<Consultation[]> {
-    return this.httpClient.get<Consultation[]>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/getAll/'+id, {
+    return this.httpClient.get<Consultation[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/getAll/'+id, {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -39,7 +41,7 @@ export class ConsultationService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -48,7 +50,7 @@ export class ConsultationService {
   }
 
   getConsultationById(id: string|null): Observable<Consultation> {
-    return this.httpClient.get<Consultation>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/get/' + id,{
+    return this.httpClient.get<Consultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -59,7 +61,7 @@ export class ConsultationService {
 
   editConsultation(s: ConsultationRequest): Observable<Consultation> {
     console.log(s);
-    return this.httpClient.put<Consultation>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/edit/'+s.id, s,{
+    return this.httpClient.put<Consultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -68,7 +70,7 @@ export class ConsultationService {
   }
   addConsultation(s: ConsultationRequest): Observable<Consultation> {
     console.log(s);
-    return this.httpClient.post<Consultation>(baseUrl + '/RELATIONSHIP-SERVICE/consultation/add', s,{
+    return this.httpClient.post<Consultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/consultation/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

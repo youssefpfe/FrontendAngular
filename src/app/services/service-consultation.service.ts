@@ -6,6 +6,7 @@ import {Consultant} from "../common/Consultant";
 import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {ServiceConsultationRequest} from "../common/ServiceConsultationRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,10 @@ export class ServiceConsultationService {
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
   getServicesList(): Observable<ServiceConsultation[]> {
-    return this.httpClient.get<ServiceConsultation[]>(baseUrl + '/RELATIONSHIP-SERVICE/serviceConsultation/getAll',{
+    return this.httpClient.get<ServiceConsultation[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/serviceConsultation/getAll',{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -27,7 +29,7 @@ export class ServiceConsultationService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/serviceConsultation/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/serviceConsultation/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -36,7 +38,7 @@ export class ServiceConsultationService {
   }
 
   getServiceById(id: any): Observable<ServiceConsultation> {
-    return this.httpClient.get<ServiceConsultation>(baseUrl + '/RELATIONSHIP-SERVICE/serviceConsultation/get/' + id,{
+    return this.httpClient.get<ServiceConsultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/serviceConsultation/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -47,7 +49,7 @@ export class ServiceConsultationService {
 
   editService(s: ServiceConsultationRequest): Observable<ServiceConsultation> {
 
-    return this.httpClient.put<ServiceConsultation>(baseUrl + '/RELATIONSHIP-SERVICE/serviceConsultation/edit/'+s.id, s,{
+    return this.httpClient.put<ServiceConsultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/serviceConsultation/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -56,7 +58,7 @@ export class ServiceConsultationService {
   }
   addService(s: ServiceConsultationRequest): Observable<ServiceConsultation> {
 
-    return this.httpClient.post<ServiceConsultation>(baseUrl + '/RELATIONSHIP-SERVICE/serviceConsultation/add', s,{
+    return this.httpClient.post<ServiceConsultation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/serviceConsultation/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

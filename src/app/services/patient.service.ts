@@ -5,11 +5,13 @@ import {SalleAttente} from "../common/SalleAttente";
 import {Patient} from "../common/Patient";
 import {PatientRequest} from "../common/PatientRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -19,7 +21,7 @@ export class PatientService {
 
 
   getPatientsList(): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/getAll', {
+    return this.httpClient.get<Patient[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -28,7 +30,7 @@ export class PatientService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -37,7 +39,7 @@ export class PatientService {
   }
 
   getPatientById(id: string|null): Observable<Patient> {
-    return this.httpClient.get<Patient>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/get/' + id,{
+    return this.httpClient.get<Patient>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -47,7 +49,7 @@ export class PatientService {
   }
 
   getPatientBySalleId(id: any): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/getAllBySalle/' + id,{
+    return this.httpClient.get<Patient[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/getAllBySalle/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -58,7 +60,7 @@ export class PatientService {
 
   editPatient(s: PatientRequest): Observable<Patient> {
     console.log(s);
-    return this.httpClient.put<Patient>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/edit/'+s.id, s,{
+    return this.httpClient.put<Patient>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -67,7 +69,7 @@ export class PatientService {
   }
   addPatient(s: PatientRequest): Observable<Patient> {
     console.log(s);
-    return this.httpClient.post<Patient>(baseUrl + '/RELATIONSHIP-SERVICE/Patient/add', s,{
+    return this.httpClient.post<Patient>(this.baseUrl  + '/RELATIONSHIP-SERVICE/Patient/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

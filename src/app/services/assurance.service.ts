@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Accueil} from "../common/Accueil";
 import {baseUrl} from "../../environments/environment";
 import {Assurance} from "../common/Assurance";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class AssuranceService {
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
   getAssuranceList(): Observable<Assurance[]> {
-    return this.httpClient.get<Assurance[]>(baseUrl + '/ASSURANCE-SERVICE/assurance/getAll', {
+    return this.httpClient.get<Assurance[]>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -23,7 +25,7 @@ export class AssuranceService {
     });
   }
 getAssuranceListByDates(d1:any,d2:any): Observable<Assurance[]> {
-    return this.httpClient.get<Assurance[]>(baseUrl + '/ASSURANCE-SERVICE/assurance/getByDates/'+d1+"/"+d2, {
+    return this.httpClient.get<Assurance[]>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/getByDates/'+d1+"/"+d2, {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -32,7 +34,7 @@ getAssuranceListByDates(d1:any,d2:any): Observable<Assurance[]> {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/ASSURANCE-SERVICE/assurance/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -40,7 +42,7 @@ getAssuranceListByDates(d1:any,d2:any): Observable<Assurance[]> {
     })
   }
 deleteAll() {
-    return this.httpClient.delete<string>(baseUrl + '/ASSURANCE-SERVICE/assurance/deleteAll',{
+    return this.httpClient.delete<string>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/deleteAll',{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -49,7 +51,7 @@ deleteAll() {
   }
 
   getAssuranceById(id: any): Observable<Assurance> {
-    return this.httpClient.get<Assurance>(baseUrl + '/ASSURANCE-SERVICE/assurance/get/' + id,{
+    return this.httpClient.get<Assurance>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -60,7 +62,7 @@ deleteAll() {
 
   editAssurance(a: Assurance): Observable<Assurance> {
 
-    return this.httpClient.put<Assurance>(baseUrl + '/ASSURANCE-SERVICE/assurance/edit/'+a.id, a,{
+    return this.httpClient.put<Assurance>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/edit/'+a.id, a,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -69,7 +71,7 @@ deleteAll() {
   }
   addAssurance(a: Assurance): Observable<Assurance> {
 
-    return this.httpClient.post<Assurance>(baseUrl + '/ASSURANCE-SERVICE/assurance/add', a,{
+    return this.httpClient.post<Assurance>(this.baseUrl  + '/ASSURANCE-SERVICE/assurance/add', a,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

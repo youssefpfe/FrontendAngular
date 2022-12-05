@@ -6,18 +6,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {SignupRequestPersonnelMedical} from "../common/user/SignupRequestPersonnelMedical";
 import {PersonnelMedical} from "../common/PersonnelMedical";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonnelMedicalService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
 
   getPersonnelsList(): Observable<PersonnelMedical[]> {
-    return this.httpClient.get<PersonnelMedical[]>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/Personnel/getAll',{
+    return this.httpClient.get<PersonnelMedical[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/Personnel/getAll',{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -29,7 +31,7 @@ export class PersonnelMedicalService {
 
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -39,7 +41,7 @@ export class PersonnelMedicalService {
   }
 
   getPersonnelById(id: string|null): Observable<PersonnelMedical> {
-    return this.httpClient.get<PersonnelMedical>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/getPersonnelMedical/' + id,{
+    return this.httpClient.get<PersonnelMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/getPersonnelMedical/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -50,7 +52,7 @@ export class PersonnelMedicalService {
 
   editPersonnel(p: PersonnelMedical): Observable<PersonnelMedical> {
 
-    return this.httpClient.put<PersonnelMedical>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/edit/Personnel', p,{
+    return this.httpClient.put<PersonnelMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/edit/Personnel', p,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -59,7 +61,7 @@ export class PersonnelMedicalService {
   }
   addPersonnel(p: SignupRequestPersonnelMedical): Observable<PersonnelMedical> {
 
-    return this.httpClient.post<PersonnelMedical>(baseUrl + '/RELATIONSHIP-SERVICE/api/auth/PersonnelMedical/signup', p,{
+    return this.httpClient.post<PersonnelMedical>(this.baseUrl  + '/RELATIONSHIP-SERVICE/api/auth/PersonnelMedical/signup', p,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

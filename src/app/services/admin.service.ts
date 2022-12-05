@@ -5,7 +5,8 @@ import {Consultant} from "../common/Consultant";
 import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {Utilisateur} from "../common/Utilisateur";
 import {SignupRequest} from "../common/user/SignupRequest";
-import {baseUrl} from "../../environments/environment";
+//import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,11 @@ export class AdminService {
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
 
   getAdminsList(): Observable<Utilisateur[]> {
-    return this.httpClient.get<Utilisateur[]>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/getAll',{
+    return this.httpClient.get<Utilisateur[]>(this.baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/getAll',{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -28,7 +30,7 @@ export class AdminService {
 
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -37,7 +39,7 @@ export class AdminService {
   }
 
   getAdminById(id: string|null): Observable<Utilisateur> {
-    return this.httpClient.get<Utilisateur>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/get/' + id,{
+    return this.httpClient.get<Utilisateur>(this.baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -48,7 +50,7 @@ export class AdminService {
 
   editAdmin(a: Utilisateur): Observable<Utilisateur> {
 
-    return this.httpClient.put<Utilisateur>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/edit/Admin', a,{
+    return this.httpClient.put<Utilisateur>(this.baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/edit/Admin', a,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -57,7 +59,7 @@ export class AdminService {
   }
   addAdmin(a: SignupRequest): Observable<Utilisateur> {
 
-    return this.httpClient.post<Utilisateur>(baseUrl + '/RELATIONSHIP-SERVICE/api/auth/Admin/signup', a,{
+    return this.httpClient.post<Utilisateur>(this.baseUrl + '/RELATIONSHIP-SERVICE/api/auth/Admin/signup', a,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

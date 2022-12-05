@@ -8,11 +8,13 @@ import {ConsultationRequest} from "../common/ConsultationRequest";
 import {Ordonnance} from "../common/Ordonnance";
 import {OrdonnanceRequest} from "../common/OrdonnanceRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdonnanceService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -22,7 +24,7 @@ export class OrdonnanceService {
 
 
   getOrdonnancesList(): Observable<Ordonnance[]> {
-    return this.httpClient.get<Ordonnance[]>(baseUrl + '/RELATIONSHIP-SERVICE/ordonnance/getAll', {
+    return this.httpClient.get<Ordonnance[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/ordonnance/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -31,7 +33,7 @@ export class OrdonnanceService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/ordonnance/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/ordonnance/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -40,7 +42,7 @@ export class OrdonnanceService {
   }
 
   getOrdonnanceById(id: string|null): Observable<Ordonnance> {
-    return this.httpClient.get<Ordonnance>(baseUrl + '/RELATIONSHIP-SERVICE/ordonnance/get/' + id,{
+    return this.httpClient.get<Ordonnance>(this.baseUrl  + '/RELATIONSHIP-SERVICE/ordonnance/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -51,7 +53,7 @@ export class OrdonnanceService {
 
   editOrdonnance(s: OrdonnanceRequest): Observable<Ordonnance> {
     console.log(s);
-    return this.httpClient.put<Ordonnance>(baseUrl + '/RELATIONSHIP-SERVICE/ordonnance/edit/'+s.id, s,{
+    return this.httpClient.put<Ordonnance>(this.baseUrl  + '/RELATIONSHIP-SERVICE/ordonnance/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -60,7 +62,7 @@ export class OrdonnanceService {
   }
   addOrdonnance(s: OrdonnanceRequest): Observable<Ordonnance> {
     console.log(s);
-    return this.httpClient.post<Ordonnance>(baseUrl + '/RELATIONSHIP-SERVICE/ordonnance/add', s,{
+    return this.httpClient.post<Ordonnance>(this.baseUrl  + '/RELATIONSHIP-SERVICE/ordonnance/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

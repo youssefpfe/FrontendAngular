@@ -5,6 +5,7 @@ import {SalleAttente} from "../common/SalleAttente";
 import {PriseRdv} from "../common/PriseRdv";
 import {PriseRdvRequest} from "../common/PriseRdvRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class PriseRdvService {
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
 
 
   getPriseRdvsList(): Observable<SalleAttente[]> {
-    return this.httpClient.get<SalleAttente[]>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/getAll', {
+    return this.httpClient.get<SalleAttente[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -26,7 +28,7 @@ export class PriseRdvService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -35,7 +37,7 @@ export class PriseRdvService {
   }
 
   getPriseRdvById(id: string|null): Observable<PriseRdv> {
-    return this.httpClient.get<PriseRdv>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/get/' + id,{
+    return this.httpClient.get<PriseRdv>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -44,7 +46,7 @@ export class PriseRdvService {
 
   }
   getAllPriseRdvByConsultant(id: any): Observable<PriseRdv[]> {
-    return this.httpClient.get<PriseRdv[]>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/rdvConsultant/' + id,{
+    return this.httpClient.get<PriseRdv[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/rdvConsultant/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -53,7 +55,7 @@ export class PriseRdvService {
 
   }
 getAllPriseRdvByPatient(id: any): Observable<PriseRdv[]> {
-    return this.httpClient.get<PriseRdv[]>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/rdvPatient/' + id,{
+    return this.httpClient.get<PriseRdv[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/rdvPatient/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -64,7 +66,7 @@ getAllPriseRdvByPatient(id: any): Observable<PriseRdv[]> {
 
   editPriseRdv(s: PriseRdvRequest): Observable<PriseRdv> {
     console.log(s);
-    return this.httpClient.put<PriseRdv>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/edit/'+s.id, s,{
+    return this.httpClient.put<PriseRdv>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -73,7 +75,7 @@ getAllPriseRdvByPatient(id: any): Observable<PriseRdv[]> {
   }
   addPriseRdv(s: PriseRdvRequest): Observable<PriseRdv> {
     console.log(s);
-    return this.httpClient.post<PriseRdv>(baseUrl + '/RELATIONSHIP-SERVICE/priseRDV/add', s,{
+    return this.httpClient.post<PriseRdv>(this.baseUrl  + '/RELATIONSHIP-SERVICE/priseRDV/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

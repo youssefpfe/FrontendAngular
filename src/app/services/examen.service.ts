@@ -5,11 +5,13 @@ import {SalleAttente} from "../common/SalleAttente";
 import {Examen} from "../common/Examen";
 import {ExamenRequest} from "../common/ExamenRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExamenService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -19,7 +21,7 @@ export class ExamenService {
 
 
   getExamenList(): Observable<Examen[]> {
-    return this.httpClient.get<Examen[]>(baseUrl + '/RELATIONSHIP-SERVICE/examen/getAll', {
+    return this.httpClient.get<Examen[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/examen/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -28,7 +30,7 @@ export class ExamenService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/examen/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/examen/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -37,7 +39,7 @@ export class ExamenService {
   }
 
   getExamenById(id: string|null): Observable<Examen> {
-    return this.httpClient.get<Examen>(baseUrl + '/RELATIONSHIP-SERVICE/examen/get/' + id,{
+    return this.httpClient.get<Examen>(this.baseUrl  + '/RELATIONSHIP-SERVICE/examen/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -48,7 +50,7 @@ export class ExamenService {
 
   editExamen(s: Examen): Observable<Examen> {
     console.log(s);
-    return this.httpClient.put<Examen>(baseUrl + '/RELATIONSHIP-SERVICE/examen/edit/'+s.id, s,{
+    return this.httpClient.put<Examen>(this.baseUrl  + '/RELATIONSHIP-SERVICE/examen/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -57,7 +59,7 @@ export class ExamenService {
   }
   addExamen(s: ExamenRequest): Observable<Examen> {
 
-    return this.httpClient.post<Examen>(baseUrl + '/RELATIONSHIP-SERVICE/examen/add',s,{
+    return this.httpClient.post<Examen>(this.baseUrl  + '/RELATIONSHIP-SERVICE/examen/add',s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

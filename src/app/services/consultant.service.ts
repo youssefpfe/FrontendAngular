@@ -5,6 +5,7 @@ import {Consultant} from "../common/Consultant";
 
 import {SignupRequestConsultant} from "../common/user/SignupRequestConsultant";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 @Injectable({
   providedIn: 'root'
 })
@@ -13,9 +14,10 @@ export class ConsultantService {
   public subscriber$ = this.observer.asObservable();
 
   constructor(private httpClient: HttpClient) { }
+  baseUrl=environment.baseUrl;
 
   getConsultantsList(): Observable<Consultant[]> {
-    return this.httpClient.get<Consultant[]>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/Consultant/getAll',{
+    return this.httpClient.get<Consultant[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/Consultant/getAll',{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -27,7 +29,7 @@ export class ConsultantService {
 
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -36,7 +38,7 @@ export class ConsultantService {
   }
 
   getConsultantById(id: string|null): Observable<Consultant> {
-    return this.httpClient.get<Consultant>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/getConsultant/' + id,{
+    return this.httpClient.get<Consultant>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/getConsultant/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -47,7 +49,7 @@ export class ConsultantService {
 
   editConsultant(c: Consultant): Observable<Consultant> {
 
-    return this.httpClient.put<Consultant>(baseUrl + '/RELATIONSHIP-SERVICE/utilisateur/edit/Consultant', c,{
+    return this.httpClient.put<Consultant>(this.baseUrl  + '/RELATIONSHIP-SERVICE/utilisateur/edit/Consultant', c,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -56,7 +58,7 @@ export class ConsultantService {
   }
   addConsultant(c: SignupRequestConsultant): Observable<SignupRequestConsultant> {
 
-    return this.httpClient.post<SignupRequestConsultant>(baseUrl + '/RELATIONSHIP-SERVICE/api/auth/Consultant/signup', c,{
+    return this.httpClient.post<SignupRequestConsultant>(this.baseUrl  + '/RELATIONSHIP-SERVICE/api/auth/Consultant/signup', c,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

@@ -6,11 +6,13 @@ import {OrdonnanceRequest} from "../common/OrdonnanceRequest";
 import {Facturation} from "../common/Facturation";
 import {FacturationRequest} from "../common/FacturationRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FacturationService {
+  baseUrl=environment.baseUrl;
 
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
@@ -20,7 +22,7 @@ export class FacturationService {
 
 
   getFacturationsList(): Observable<Facturation[]> {
-    return this.httpClient.get<Facturation[]>(baseUrl + '/RELATIONSHIP-SERVICE/facturation/getAll', {
+    return this.httpClient.get<Facturation[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/facturation/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -29,7 +31,7 @@ export class FacturationService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/facturation/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/facturation/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -38,7 +40,7 @@ export class FacturationService {
   }
 
   getFacturationById(id: string|null): Observable<Facturation> {
-    return this.httpClient.get<Facturation>(baseUrl + '/RELATIONSHIP-SERVICE/facturation/get/' + id,{
+    return this.httpClient.get<Facturation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/facturation/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -49,7 +51,7 @@ export class FacturationService {
 
   editOrdonnance(s: FacturationRequest): Observable<Facturation> {
     console.log(s);
-    return this.httpClient.put<Facturation>(baseUrl + '/RELATIONSHIP-SERVICE/facturation/edit/'+s.id, s,{
+    return this.httpClient.put<Facturation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/facturation/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -58,7 +60,7 @@ export class FacturationService {
   }
   addFacturation(s: FacturationRequest): Observable<Facturation> {
     console.log(s);
-    return this.httpClient.post<Facturation>(baseUrl + '/RELATIONSHIP-SERVICE/facturation/add', s,{
+    return this.httpClient.post<Facturation>(this.baseUrl  + '/RELATIONSHIP-SERVICE/facturation/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'

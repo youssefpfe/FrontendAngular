@@ -5,6 +5,7 @@ import {ServiceConsultation} from "../common/ServiceConsultation";
 import {SalleAttente} from "../common/SalleAttente";
 import {ServiceConsultationRequest} from "../common/ServiceConsultationRequest";
 import {baseUrl} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,14 @@ import {baseUrl} from "../../environments/environment";
 export class SalleAttenteService {
   observer = new Subject();
   public subscriber$ = this.observer.asObservable();
+  baseUrl=environment.baseUrl;
 
   constructor(private httpClient: HttpClient) {
   }
 
 
   getSallesList(): Observable<SalleAttente[]> {
-    return this.httpClient.get<SalleAttente[]>(baseUrl + '/RELATIONSHIP-SERVICE/salleAttente/getAll', {
+    return this.httpClient.get<SalleAttente[]>(this.baseUrl  + '/RELATIONSHIP-SERVICE/salleAttente/getAll', {
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -27,7 +29,7 @@ export class SalleAttenteService {
   }
 
   delete(id: any) {
-    return this.httpClient.delete<string>(baseUrl + '/RELATIONSHIP-SERVICE/salleAttente/delete/' + id,{
+    return this.httpClient.delete<string>(this.baseUrl  + '/RELATIONSHIP-SERVICE/salleAttente/delete/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -36,7 +38,7 @@ export class SalleAttenteService {
   }
 
   getSalleById(id: string|null): Observable<SalleAttente> {
-    return this.httpClient.get<SalleAttente>(baseUrl + '/RELATIONSHIP-SERVICE/salleAttente/get/' + id,{
+    return this.httpClient.get<SalleAttente>(this.baseUrl  + '/RELATIONSHIP-SERVICE/salleAttente/get/' + id,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -47,7 +49,7 @@ export class SalleAttenteService {
 
   editSalle(s: SalleAttente): Observable<SalleAttente> {
 
-    return this.httpClient.put<SalleAttente>(baseUrl + '/RELATIONSHIP-SERVICE/salleAttente/edit/'+s.id, s,{
+    return this.httpClient.put<SalleAttente>(this.baseUrl  + '/RELATIONSHIP-SERVICE/salleAttente/edit/'+s.id, s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
@@ -56,7 +58,7 @@ export class SalleAttenteService {
   }
   addSalle(s: SalleAttente): Observable<SalleAttente> {
     console.log(s);
-    return this.httpClient.post<SalleAttente>(baseUrl + '/RELATIONSHIP-SERVICE/salleAttente/add', s,{
+    return this.httpClient.post<SalleAttente>(this.baseUrl  + '/RELATIONSHIP-SERVICE/salleAttente/add', s,{
       withCredentials: true,
       headers:new HttpHeaders({
         'Access-Control-Allow-Origin':'*'
