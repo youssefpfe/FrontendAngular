@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
       error: (error) => {
         this.messageService.add({severity:'error', summary: 'Error!', detail: 'Username ou Password Erroné '});
 
-       setTimeout(()=>{
+       /*setTimeout(()=>{
         window.location.reload();
-       },2000);
+       },2000);*/
       },
     });
   }
