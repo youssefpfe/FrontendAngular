@@ -24,12 +24,12 @@ export class AppComponent {
       }
     });
 
-    console.warn(`🚨 Hopital Militaire 🚨 `);
-    console.log = function():void{};
-    console.debug = function():void{};
-    console.warn = function():void{};
-    console.info = function():void{};
-    console.error = function():void{};
+  //  console.warn(`🚨 Hopital Militaire 🚨 `);
+  //  console.log = function():void{};
+  //  console.debug = function():void{};
+  //  console.warn = function():void{};
+  //  console.info = function():void{};
+   // console.error = function():void{};
   }
   ngOnInit(): void {
     this.auth.userProfile.subscribe((data) => {
