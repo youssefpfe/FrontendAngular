@@ -39,11 +39,6 @@ pipeline {
 
             }
         }
-          stage('Test'){
-                    steps {
-                        sh "ng test --code-coverage"
-                    }
-                }
 
       stage('Build docker image '){
                    steps {
